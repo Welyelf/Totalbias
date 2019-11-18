@@ -24,7 +24,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = '';
-
+if ($_SERVER['SERVER_NAME'] == 'totalbias') {
+    $config['base_url'] = '//totalbias/';
+} else{
+    $config['base_url'] = '//REPLACE-WITH-CHURCH-URL/';
+}
 /*
 |--------------------------------------------------------------------------
 | Index File
