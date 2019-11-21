@@ -38,61 +38,22 @@
 
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="card-stats">
-                            <div class="card-body">
-                                <?php foreach ($column1 as $c1) { ?>
-                                    <a target="_blank" href="<?php echo $c1->url; ?>">
-                                    <div class="row">
-                                        <div class="col-12 col-md-12">
-                                            <div class="panel-body">
-                                                <h4><?php echo $c1->title; ?></h4>
-                                    </a>
-                                                <small style="color:#d3d3d3;font-size: 16px;"><i><?php echo $c1->publisher; ?></i></small>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="card-body" id="columnA_data">
 
-
-                                <?php } ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="card-stats">
-                            <div class="card-body ">
-                                <?php foreach ($column2 as $c1) { ?>
-                                    <a target="_blank" href="<?php echo $c1->url; ?>" >
-                                        <div class="row">
-                                            <div class="col-12 col-md-12">
-                                                <div class="panel-body">
-                                                    <h3><?php echo $c1->title; ?></h3>
-                                    </a>
-                                                    <small style="color:#d3d3d3;font-size: 16px;"><i><?php echo $c1->publisher; ?></i></small>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="card-body " id="columnB_data">
 
-
-                                <?php } ?>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="card-stats">
-                            <div class="card-body ">
-                                <?php foreach ($column3 as $c1) { ?>
-                                    <a target="_blank" href="<?php echo $c1->url; ?>">
-                                        <div class="row">
-                                            <div class="col-12 col-md-12">
-                                                <div class="panel-body">
-                                                    <h4><?php echo $c1->title; ?></h4>
-                                    </a>
-                                                    <small style="color:#d3d3d3;font-size: 16px;"><i><?php echo $c1->publisher; ?></i></small>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="card-body " id="columnC_data">
 
-
-                                <?php } ?>
                             </div>
 
                         </div>
@@ -129,6 +90,9 @@
 
         <script type="text/javascript">
             $(document).ready( function () {
+
+                show_columnA_data();
+
                 //var slider = document.getElementById("myRange");
                 function sliderChange(val) {
                     document.getElementById('demo').innerHTML = val;
@@ -138,8 +102,60 @@
                 document.getElementById("demo").innerHTML = x.value;
                 x.oninput = function() {
                     document.getElementById("demo").innerHTML = this.value;
+                    $("#columnA_data").empty();
+                    $("#columnB_data").empty();
+                    $("#columnC_data").empty();
+                    show_columnA_data();
                 }
-                function initialize_data(){
+                function show_columnA_data(){
+
+                    var rating_value =  $('#customRange2').val();
+
+                    if( (rating_value - 1) !== 0){
+                        //alert(rating_value - 1);
+                    }
+
+                    if( Number(rating_value)+1 < 6){
+                        //alert(Number(rating_value)+1);
+                    }
+                    var ajaxdata = {
+                        rating : $('#customRange2').val(),
+                    };
+                    //$("#columnA_data").append("");
+                    //$('#columnA_data').remove();
+                    $.ajax({
+                        url:'/totalbias/get_cloumnA_data',
+                        type:"post",
+                        data:ajaxdata,
+                        success: function(data){
+                            //alert(data);
+
+                            var links_data = data;
+                            var obj = JSON.parse(links_data);
+
+                            var trHTML_left = '';
+                            var trHTML_center = '';
+                            var trHTML_right = '';
+                            obj.forEach(function(item){
+                                if(item.column_num == 1){
+                                    trHTML_left += item.title;
+                                }else if(item.column_num == 2){
+                                    trHTML_center += item.title;
+                                }else if(item.column_num == 3){
+                                    trHTML_right += item.title;
+                                }
+                                //alert(item.column_num);
+                            });
+                            //$('#records_table').load(testHtml);
+                            $("#columnA_data").append(trHTML_left);
+                            $("#columnB_data").append(trHTML_center);
+                            $("#columnC_data").append(trHTML_right);
+                            //alert("nice");
+                        },error: function (jqXHR, textStatus, errorThrown) {
+                            alert( textStatus + errorThrown + '! Contact your administrator.');
+                        }
+                    });
+
                 }
             });
         </script>
@@ -154,6 +170,10 @@
     }
     a:hover {
         text-decoration: underline;
+    }
+    #publisher{
+        color:#d3d3d3;
+        font-size: 16px;
     }
     @media (max-width: 991px) {
         .range_slider {
