@@ -104,10 +104,10 @@ $db['local'] = array(
 
 $db['live'] = array(
     'dsn'	=> '',
-    'hostname' => 'localhost',
-    'username' => '',
-    'password' => '',
-    'database' => '',
+    'hostname' => 'totalbias.totalbias.com',
+    'username' => 'totalbias_user',
+    'password' => 'hr#BTs3m}AY',
+    'database' => 'totalbias_db',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => FALSE,

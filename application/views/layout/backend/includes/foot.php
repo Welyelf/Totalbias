@@ -13,15 +13,15 @@
     $(document).ready( function () {
         $('#column1').DataTable({
             paginate: true,
-
+            "order": [[ 0, "desc" ]]
         });
         $('#column2').DataTable({
             paginate: true,
-
+            "order": [[ 0, "desc" ]]
         });
         $('#column3').DataTable({
             paginate: true,
-
+            "order": [[ 0, "desc" ]]
         });
     });
 </script>

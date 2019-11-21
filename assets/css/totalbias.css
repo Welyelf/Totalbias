@@ -5474,7 +5474,7 @@ License - nucleoapp.com/license/
 
 .card {
   border-radius: 12px;
-  box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+  box-shadow: 10px 6px 10px 4px rgba(140, 140, 140, 0.15);
   background-color: #FFFFFF;
   color: #252422;
   margin-bottom: 20px;
