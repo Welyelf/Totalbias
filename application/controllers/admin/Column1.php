@@ -7,6 +7,7 @@ class Column1 extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Links_model', 'links');
+        $this->auth->check(array("", ""));
 
     }
     public function index()

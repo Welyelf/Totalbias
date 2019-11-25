@@ -14,18 +14,13 @@ class Auth
         // Required Configs
         $this->CI->config->load('auth');
     }
-
     public function check($roles = FALSE, $ref_role = FALSE)
     {
         //Check if there is a logged in user
         if (!isset($this->CI->session->user)) {
             redirect(base_url($this->CI->config->item('auth_login')));
         } else {
-            if ($roles) {
-                if (!in_array($this->CI->session->user->role, $roles) || ($this->CI->session->user->role == "Admin" && $ref_role == "Super Admin")) {
-                    redirect(base_url($this->CI->config->item('auth_denied')));
-                }
-            }
+
         }
     }
 }

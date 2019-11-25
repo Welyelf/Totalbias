@@ -29,11 +29,11 @@
                         <br><br>
                         <input type="range" class="slider" min="1" max="5" id="customRange2"  />
                         <br><br>
-                        <p>Value: <span id="demo"></span></p>
+                        <p class="hidden">Value: <span id="demo"></span></p>
                     </div>
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
-                        <hr size="30">
+                        <hr >
                     </div>
 
                     <div class="col-lg-4 col-md-12 col-sm-12">
@@ -58,10 +58,12 @@
 
                         </div>
                     </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <hr >
+                    </div>
                 </div>
 
-            </div>
-            </div>
+
             <footer class="footer footer-black  footer-white ">
                 <div class="container-fluid">
                     <div class="row">
@@ -76,6 +78,7 @@
                     </div>
                 </div>
             </footer>
+
         </div>
         </div>
         </div>
@@ -93,7 +96,6 @@
 
                 show_columnA_data();
 
-                //var slider = document.getElementById("myRange");
                 function sliderChange(val) {
                     document.getElementById('demo').innerHTML = val;
                 }
@@ -110,26 +112,27 @@
                 function show_columnA_data(){
 
                     var rating_value =  $('#customRange2').val();
-
+                    fect_link_data(rating_value);
                     if( (rating_value - 1) !== 0){
-                        //alert(rating_value - 1);
+                        fect_link_data(Number(rating_value)-1);
                     }
 
                     if( Number(rating_value)+1 < 6){
-                        //alert(Number(rating_value)+1);
+                        fect_link_data(Number(rating_value)+1);
                     }
+                }
+
+                function fect_link_data(rate){
                     var ajaxdata = {
-                        rating : $('#customRange2').val(),
+                        rating : rate,
                     };
-                    //$("#columnA_data").append("");
-                    //$('#columnA_data').remove();
+
                     $.ajax({
                         url:'/totalbias/get_cloumnA_data',
                         type:"post",
                         data:ajaxdata,
                         success: function(data){
                             //alert(data);
-
                             var links_data = data;
                             var obj = JSON.parse(links_data);
 
@@ -146,16 +149,13 @@
                                 }
                                 //alert(item.column_num);
                             });
-                            //$('#records_table').load(testHtml);
                             $("#columnA_data").append(trHTML_left);
                             $("#columnB_data").append(trHTML_center);
                             $("#columnC_data").append(trHTML_right);
-                            //alert("nice");
                         },error: function (jqXHR, textStatus, errorThrown) {
                             alert( textStatus + errorThrown + '! Contact your administrator.');
                         }
                     });
-
                 }
             });
         </script>
@@ -164,6 +164,12 @@
 </html>
 
 <style>
+    hr {
+        position: relative;
+        border: none;
+        height: 3px;
+        background: black;
+    }
     a {
         text-decoration: none;
         color:#000;

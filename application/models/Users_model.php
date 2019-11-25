@@ -15,8 +15,7 @@ class Users_model extends CI_Model
 
         if ($field) {
             $result = $query->row();
-            $result = $query->row();
-             return $result->$field;
+            return $result->$field;
         } else {
             return $query->row();
         }

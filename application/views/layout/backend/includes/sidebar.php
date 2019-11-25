@@ -32,6 +32,18 @@ echo $_SERVER['REQUEST_URI'];
                 <p>Links</p>
             </a>
         </li>
+        <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/scoring"){echo "active";} ?>">
+            <a href="<?php echo base_url('/administrator/scoring'); ?>">
+                <i class="nc-icon nc-paper"></i>
+                <p>Scoring Algorithm</p>
+            </a>
+        </li>
+        <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/settings"){echo "active";} ?>">
+            <a href="<?php echo base_url('/administrator/settings'); ?>">
+                <i class="nc-icon nc-settings-gear-65"></i>
+                <p>Settings</p>
+            </a>
+        </li>
         <li class="active-pro">
             <center><span class="copyright">
                 ©

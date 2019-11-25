@@ -6,20 +6,17 @@ class Auths extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Users_model', 'users');
     }
 
 
     public function index()
     {
-        $this->load->view('auth/login.php');
+        $this->load->view('auths/login.php');
     }
     public function login($error = FALSE)
     {
         $input = $this->input->post();
-
-        if ($error == "subscription-error") {
-            $this->data['error'] = "Login Required. You already have an existing subscription.";
-        }
 
         if ($input) {
 
@@ -29,23 +26,19 @@ class Auths extends CI_Controller {
                 if ($this->bcrypt->check_password($input['password'], $user->password)) {
                     unset($user->password);
                     $this->session->set_userdata('user', $user);
-                    if ($error == "subscription-error") {
-                        redirect(base_url('user/account'));
-                        exit;
-                    }
-                    if ($user->role == "User") {
-                        redirect(base_url('user/account'));
-                    } else {
-                        redirect(base_url($this->config->item('auth_login_success')));
-                    }
+
+                    redirect(base_url($this->config->item('auth_login_success')));
                     exit;
                 }
+            }else{
+                $this->data['error'] = "Invalid Username and/or Password.";
             }
-
-            $this->data['error'] = "Invalid Username and/or Password.";
+            $this->load->view('auths/login.php' ,$this->data);
         }
-
-
-        $this->load->view('layout/backend/master.php', $this->data);
+    }
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url($this->config->item('auth_login')));
     }
 }

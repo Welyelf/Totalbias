@@ -27,7 +27,7 @@ $config['base_url'] = '';
 if ($_SERVER['SERVER_NAME'] == 'totalbias') {
     $config['base_url'] = '//totalbias/';
 } else{
-    $config['base_url'] = '//REPLACE-WITH-CHURCH-URL/';
+    $config['base_url'] = '//totalbias.com/';
 }
 /*
 |--------------------------------------------------------------------------

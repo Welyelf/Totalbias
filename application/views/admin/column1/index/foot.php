@@ -29,6 +29,16 @@
                 }
             });
         });
+        var table = $('#column1').DataTable({
+            paginate: true,
+            "lengthChange": false,
+            "pageLength": 1000,
+            "order": [[ 0, "desc" ]]
+        });
+        // $('#column1 tbody').on('click', 'tr', function () {
+        //     var data = table.row( this ).data();
+        //     //alert( 'You clicked on '+data[0]+'\'s row' );
+        // });
         $(".edit_button").on( "click", function( event ) {
             var ID=this.id;
             $('#edit_userdata').modal('show');
@@ -41,30 +51,6 @@
             $('[id="link_id"]').val(ID);
             document.getElementById("exampleModalLabel").innerHTML = "Edit Link";
         });
-
-        $("#add_link").on( "click", function( event ) {
-            $('[id="title"]').val("");
-            $('[id="column_num"]').val("1");
-            $('[id="publisher"]').val("");
-            $('[id="url"]').val("");
-            $('[id="priority"]').val("0");
-            $('[id="rating"]').val("1");
-            $('[id="link_id"]').val("");
-            document.getElementById("exampleModalLabel").innerHTML = "Add Link";
-        });
-
-        function alert_user(title,txt){
-            Swal.fire({
-                title: title,
-                text: txt,
-                icon: 'success',
-                showCancelButton: false,
-                confirmButtonText: 'OK'
-            }).then((result) => {
-                window.location = "//<?php echo $_SERVER['SERVER_NAME'];?>/administrator/column1";
-            })
-        }
-
         $(".delete_c1").on( "click", function( event ) {
             var ID=this.id;
             //alert_user("Added!","New link has been successfully added.");
@@ -90,6 +76,32 @@
                 }
             })
         });
+
+
+        $("#add_link").on( "click", function( event ) {
+            $('[id="title"]').val("");
+            $('[id="column_num"]').val("1");
+            $('[id="publisher"]').val("");
+            $('[id="url"]').val("");
+            $('[id="priority"]').val("0");
+            $('[id="rating"]').val("1");
+            $('[id="link_id"]').val("");
+            document.getElementById("exampleModalLabel").innerHTML = "Add Link";
+        });
+
+        function alert_user(title,txt){
+            Swal.fire({
+                title: title,
+                text: txt,
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                window.location = "//<?php echo $_SERVER['SERVER_NAME'];?>/administrator/column1";
+            })
+        }
+
+
 
     });
 </script>

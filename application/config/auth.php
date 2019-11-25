@@ -2,8 +2,8 @@
 
 // Redirects
 
-$config['auth_login_success'] = "admin/dashboard";
+$config['auth_login_success'] = "administrator/dashboard";
 
-$config['auth_login'] = "auth/login"; //Redirect to this page after logout was initiated
+$config['auth_login'] = "administrator"; //Redirect to this page after logout was initiated
 
 $config['auth_denied'] = "auth/access-denied"; //Redirect to this page after logout was initiated
