@@ -51,11 +51,12 @@ class Links_model extends CI_Model
         return $query->result();
     }
 
-    public function get_rating_data($rate)
+    public function get_rating_data($rate,$limit)
     {
         $this->db->order_by('priority', 'ASC');
         $this->db->where('rating', $rate);
         //$this->db->where('column_num', $column);
+        $this->db->limit($limit);
         $query = $this->db->get($this->table);
         return $query->result();
     }

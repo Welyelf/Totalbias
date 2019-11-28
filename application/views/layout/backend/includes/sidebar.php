@@ -38,7 +38,7 @@ echo $_SERVER['REQUEST_URI'];
                 <p>Scoring Algorithm</p>
             </a>
         </li>
-        <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/settings"){echo "active";} ?>">
+        <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/settings" || $_SERVER['REQUEST_URI']== "/administrator/settings/add" || $_SERVER['REQUEST_URI']== "/administrator/settings/edit"){echo "active";} ?>">
             <a href="<?php echo base_url('/administrator/settings'); ?>">
                 <i class="nc-icon nc-settings-gear-65"></i>
                 <p>Settings</p>

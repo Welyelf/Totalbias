@@ -1,3 +1,31 @@
+<?php
+//$str = "Property Features: Great Waltham is a lovely village which is 5 miles from the commuter town of Chelmsford, Essex. Chelmsford is an affluent town with links to all the main routes and less than an hour from London. The Beehive has two separate bars: the drinking room which has a pool and darts area at the end, leading directly onto the garden area. This garden is to the rear of the pub and is tidy but has plenty more potential, there is also a nice garden at the front with a large purpose-built smoking shelter. The second bar is set up in the style of a 36 restaurant and is ideal for future food sales, functions or community meetings. This pub is in a great area and an amazing footprint and has heaps of potential. Trading Style: The pub is predominately wet-led and appeals to local people from the village, the pub has started to offer food and is beginning to utilize all aspects that the business can offer. The ideal applicants would have the ability and ambition to take this pub and maximise all types of offers that are available, as well as the ability to integrate and become an integral part of this great village community. Private Accommodation: This consists of two double bedrooms, a lounge, kitchen, bathroom with separate toilet and there is an office space on the large landing. There is the benefit of plenty of storage as there is a large attic space which is accessible from both the lounge and bedroom one.";
+//
+//if (strpos($str, 'Private Accommodation:') !== false) {
+//    echo 'true';
+//}
+//
+//
+//
+//$uid = "855FM22";
+//
+//
+//$split_for_pf = explode("Trading Style:",$str);
+//
+//
+//$pf = explode("Trading Style:",$str);
+//echo "<br>";
+//echo("Property Features:" . $pf[0]);
+//$split_for_pa = explode("Private Accommodation:",$pf[1]);
+//
+//echo "<br>";
+//echo("Trading Style:" . $split_for_pa[0]);
+//
+//echo "<br>";
+//echo("Private Accommodation:" . $split_for_pa[1]);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,11 +52,10 @@
             <div class="content" style="margin-top: 13px !important;">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 range_slider" style="">
-
-                        <img src="/assets/img/tb.png" class="totalbias_logo">
-                        <br><br>
-                        <input type="range" class="slider" min="1" max="5" id="customRange2"  />
-                        <br><br>
+                        <img src="/assets/img/tb1.png" class="totalbias_logo">
+                            <br><br>
+                            <input type="range" class="slider" min="1" max="5" id="customRange2"  />
+                            <br><br>
                         <p class="hidden">Value: <span id="demo"></span></p>
                     </div>
 
@@ -139,16 +166,29 @@
                             var trHTML_left = '';
                             var trHTML_center = '';
                             var trHTML_right = '';
+                            var ctr=0;
+                            var ctr_col2=0;
+                            var ctr_col3=0;
                             obj.forEach(function(item){
                                 if(item.column_num == 1){
-                                    trHTML_left += item.title;
+                                    if(ctr < Number(<?php echo $settings->column1_limit; ?>)){
+                                        trHTML_left += item.title;
+                                        ctr++;
+                                    }
                                 }else if(item.column_num == 2){
-                                    trHTML_center += item.title;
+                                    if(ctr_col2 < Number(<?php echo $settings->column2_limit; ?>)){
+                                        trHTML_center += item.title;
+                                        ctr_col2++;
+                                    }
                                 }else if(item.column_num == 3){
-                                    trHTML_right += item.title;
+                                    if(ctr_col3 < Number(<?php echo $settings->column3_limit; ?>)){
+                                        trHTML_right += item.title;
+                                        ctr_col3++;
+                                    }
                                 }
                                 //alert(item.column_num);
                             });
+
                             $("#columnA_data").append(trHTML_left);
                             $("#columnB_data").append(trHTML_center);
                             $("#columnC_data").append(trHTML_right);
@@ -164,6 +204,9 @@
 </html>
 
 <style>
+    .hover_effect:hover,.hover_effect:focus {
+        color:#801212!important
+    }
     hr {
         position: relative;
         border: none;

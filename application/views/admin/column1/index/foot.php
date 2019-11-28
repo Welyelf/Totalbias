@@ -1,5 +1,8 @@
+
 <script type="text/javascript">
+
     $(document).ready( function () {
+
         $('#submit_form').submit(function(e){
             //alert("Girls Like You");
             e.preventDefault();
@@ -10,7 +13,11 @@
                 rating : $('#rating').val(),
                 priority : $('#priority').val(),
                 column_num : $('#column_num').val(),
-                id : $('#link_id').val()
+                author : $('#author').val(),
+                id : $('#link_id').val(),
+                title_css : "{\"font_size\" :\""+$('#font_size_title').val()+"\",\"font_color\" :\""+$('#color_title').val()+"\",\"hover_color\" :\""+$('#hover_title_color').val()+"\"}",
+                publisher_css : "{\"font_size\" :\""+$('#font_size_pub').val()+"\",\"font_color\" :\""+$('#color_pub').val()+"\",\"hover_color\" :\""+$('#hover_pub_color').val()+"\"}",
+                author_css : "{\"font_size\" :\""+$('#font_size_author').val()+"\",\"font_color\" :\""+$('#color_author').val()+"\",\"hover_color\" :\""+$('#hover_author_color').val()+"\"}",
             };
             //alert(Rating);
             $.ajax({
@@ -23,7 +30,6 @@
                     }else{
                         alert_user("Updated!","Link has been successfully updated.");
                     }
-
                 },error: function (jqXHR, textStatus, errorThrown) {
                     alert( textStatus + errorThrown + '! Contact your administrator.');
                 }
@@ -48,8 +54,34 @@
             $('[id="url"]').val($(this).data('url'));
             $('[id="priority"]').val($(this).data('priority'));
             $('[id="rating"]').val($(this).data('rating'));
+            $('[id="author"]').val($(this).data('author'));
             $('[id="link_id"]').val(ID);
+
+
+            var css_title = JSON.parse(JSON.stringify($(this).data('titlecss')));
+            console.log(css_title);
+            console.log(css_title.font_size);
+            $('[id="font_size_title"]').val(css_title.font_size);
+            $('[id="color_title"]').val(css_title.font_color);
+            $('[id="hover_title_color"]').val(css_title.hover_color);
+
+            var css_publisher = JSON.parse(JSON.stringify($(this).data('pubcss')));
+            console.log(css_publisher);
+            console.log(css_publisher.font_size);
+            $('[id="font_size_pub"]').val(css_publisher.font_size);
+            $('[id="color_pub"]').val(css_publisher.font_color);
+            $('[id="hover_pub_color"]').val(css_publisher.hover_color);
+
+            var css_author = JSON.parse(JSON.stringify($(this).data('authorcss')));
+            console.log(css_author);
+            console.log(css_author.font_size);
+            $('[id="font_size_author"]').val(css_author.font_size);
+            $('[id="color_author"]').val(css_author.font_color);
+            $('[id="hover_author_color"]').val(css_author.hover_color);
+
             document.getElementById("exampleModalLabel").innerHTML = "Edit Link";
+
+
         });
         $(".delete_c1").on( "click", function( event ) {
             var ID=this.id;

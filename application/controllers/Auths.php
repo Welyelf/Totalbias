@@ -8,8 +8,6 @@ class Auths extends CI_Controller {
         parent::__construct();
         $this->load->model('Users_model', 'users');
     }
-
-
     public function index()
     {
         $this->load->view('auths/login.php');
@@ -19,9 +17,7 @@ class Auths extends CI_Controller {
         $input = $this->input->post();
 
         if ($input) {
-
             $user = $this->users->get_details($input['username']);
-
             if ($user) {
                 if ($this->bcrypt->check_password($input['password'], $user->password)) {
                     unset($user->password);

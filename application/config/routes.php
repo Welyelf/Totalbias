@@ -51,12 +51,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //$route['default_controller'] = 'welcome';
 $route['default_controller'] = 'totalbias';
-
-
 //backend routes
 $route['administrator'] = 'auths';
 $route['administrator/dashboard'] = 'admin/dashboard';
 $route['administrator/column1'] = 'admin/column1';
+$route['administrator/scoring'] = 'admin/scoring';
+$route['administrator/settings'] = 'admin/settings';
+$route['administrator/settings/add'] = 'admin/settings/add';
+$route['administrator/settings/add/(:any)'] = 'admin/settings/add/$1';
 
 $route['404_override'] = '';;
 $route['translate_uri_dashes'] = FALSE;
