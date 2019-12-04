@@ -124,6 +124,21 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <input type="checkbox" name="include_image" class="include_image" id="include_image"> Include Image <br>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="file" name="file" id="img_path" accept="image/x-png,image/gif,image/jpeg" style="display:none;" >
+                                            </div>
+                                            <div class="col-md-6" id="image_path_holder" style="display:none;">
+                                                Image path : <small id="image-path"></small>
+                                            </div>
+                                            <div class="col-md-12" id="image_holder" style="display:none;">
+                                                <img id="article_image" src='' alt='' class='responsive' width="200" height="150"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
                                             <label for="column_num" class="col-form-label text-md-right">Column</label>
                                             <div class="col-md-12">
                                                 <select class="form-control" name="column_num" id="column_num">
@@ -242,7 +257,7 @@
                                                         <button type="button" class="edit_button" id="<?php echo $c1->id; ?>" data-title="<?php echo $c1->title; ?>" data-pub="<?php echo $c1->publisher; ?>"
                                                         data-url="<?php echo $c1->url; ?>" data-column_num="<?php echo $c1->column_num; ?>" data-priority="<?php echo $c1->priority; ?>" data-rating="<?php echo $c1->rating; ?>"
                                                         data-titlecss="<?php  echo htmlentities($c1->title_css); ?>" data-pubcss="<?php  echo htmlentities($c1->publisher_css); ?>" data-authorcss="<?php  echo htmlentities($c1->author_css); ?>"
-                                                        data-author="<?php echo $c1->author; ?>">
+                                                        data-author="<?php echo $c1->author; ?>" data-imgdisplay="<?php echo $c1->img_display; ?>" data-imgpath="<?php echo $c1->img_path; ?>">
                                                             <i class="fa fa-edit" style="font-size:16px"></i>
                                                         </button>
                                                         <button type="button" id="<?php echo $c1->id; ?>" class="delete_c1">

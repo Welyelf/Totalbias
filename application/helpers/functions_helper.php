@@ -27,3 +27,12 @@ function select_option($index,$get){
         return $order_others[$index];
     }
 }
+
+function font_weight_list($index,$get){
+    $order_others = array('bold','normal','bolder','lighter','number','initial','inherit');
+    if($get){
+        return count($order_others);
+    }else{
+        return $order_others[$index];
+    }
+}

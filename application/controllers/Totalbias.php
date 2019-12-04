@@ -90,8 +90,19 @@ class Totalbias extends CI_Controller {
                 $publisher_css_assign = $publisher_css_assign ."color:".$publisher_css['font_color'].";";
             }
 
-            $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><div class='panel-body'><a class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
-            <small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small> </div></div></div>";
+
+            if($data_link->img_display == 1){
+                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><img src='$data_link->img_path' alt='$data_link->title' class='responsive'/><br><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
+                <small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small> </div></div></div>";
+            }
+            else{
+                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
+                <small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small> </div></div></div>";
+
+            }
+
+            //$arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><img src='/assets/img/11.jpg' alt='Nature' class='responsive'/><br><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
+            //<small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small> </div></div></div>";
             //$arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><div class='panel-body'><a target='_blank' href=' $data_link->url'><h4> $data_link->title </h4></a><small id='publisher'><i>$data_link->publisher</i></small></div></div></div>";
             $arr['column_num'] = $data_link->column_num;
             $data_links[] =  $arr;

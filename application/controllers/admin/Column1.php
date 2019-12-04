@@ -23,7 +23,6 @@ class Column1 extends CI_Controller {
         $input = $this->input->post();
         if ($input) {
             $input['datetime'] = date("m-d-Y h:i A");
-            $input['img_path'] ="";
             if($input['id']!= ""){
                 $id = $input['id'];
                 unset($input['id']);
@@ -43,6 +42,30 @@ class Column1 extends CI_Controller {
         if ($this->links->delete($id)) {
             echo  "nice";
         }
+    }
+
+    public function upload_pic(){
+        $input = $this->input->post();
+        if ($input) {
+            $this->load->library('upload');
+
+            $config['upload_path'] ='./assets/img';
+            $config['overwrite'] = true;
+            $config['encrypt_name'] = TRUE;
+            $config['allowed_types']='jpg|png';
+
+            $this->upload->initialize($config);
+            if (!$this->upload->do_upload('file')) {
+                //$this->data['file'] = $this->upload->display_errors();
+                $this->data['error'] = $this->upload->display_errors();
+            } else {
+                $upload_data = $this->upload->data();
+                $image_path = '/assets/img/' . $upload_data['file_name'];
+                echo $image_path;
+            }
+
+        }
+
     }
 
 

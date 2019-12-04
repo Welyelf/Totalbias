@@ -3,9 +3,48 @@
 
     $(document).ready( function () {
 
+        $('input[type="checkbox"]').on('change', function () {
+            //$('input[type="checkbox"]').not(this).prop('checked', false);
+            //var checkedValue = document.querySelector('.include_image:checked').value;
+            if ((this).checked == true){
+                document.getElementById('img_path').style.display = "block";
+            }else{
+                document.getElementById('img_path').style.display = "none";
+            }
+        });
+
         $('#submit_form').submit(function(e){
-            //alert("Girls Like You");
+
             e.preventDefault();
+            var is_img_show;
+            var image_path="";
+            var img_path_from_db = document.getElementById("image-path").innerHTML;
+            if(img_path_from_db !== ""){
+                image_path = img_path_from_db;
+            }
+
+            //alert("Girls Like You");
+            if (document.getElementById('include_image').checked) {
+                is_img_show = 1;
+                var img = document.getElementById("img_path").value;
+                if(img!==""){
+                    $.ajax({
+                        url:'/admin/column1/upload_pic',
+                        type:"post",
+                        data:new FormData(this),
+                        processData:false,
+                        contentType:false,
+                        cache:false,
+                        async:false,
+                        success: function(data){
+                            image_path = data;
+                        }
+                    });
+                }
+            }else{
+                is_img_show = 0;
+            }
+
             var ajaxdata = {
                 title : $('#title').val(),
                 publisher : $('#publisher').val(),
@@ -18,12 +57,14 @@
                 title_css : "{\"font_size\" :\""+$('#font_size_title').val()+"\",\"font_color\" :\""+$('#color_title').val()+"\",\"hover_color\" :\""+$('#hover_title_color').val()+"\"}",
                 publisher_css : "{\"font_size\" :\""+$('#font_size_pub').val()+"\",\"font_color\" :\""+$('#color_pub').val()+"\",\"hover_color\" :\""+$('#hover_pub_color').val()+"\"}",
                 author_css : "{\"font_size\" :\""+$('#font_size_author').val()+"\",\"font_color\" :\""+$('#color_author').val()+"\",\"hover_color\" :\""+$('#hover_author_color').val()+"\"}",
+                img_path : image_path,
+                img_display : is_img_show,
             };
-            //alert(Rating);
+
             $.ajax({
                 url:'/admin/column1/add',
                 type:"post",
-                data:ajaxdata,
+                data: ajaxdata ,
                 success: function(data){
                     if(data === "add"){
                         alert_user("Added!","New link has been successfully added.");
@@ -55,8 +96,28 @@
             $('[id="priority"]').val($(this).data('priority'));
             $('[id="rating"]').val($(this).data('rating'));
             $('[id="author"]').val($(this).data('author'));
-            $('[id="link_id"]').val(ID);
+            $('[id="image-path"]').html($(this).data('imgpath'));
+            $("#article_image").attr('src',$(this).data('imgpath'));
 
+            if($(this).data('imgdisplay')===1){
+                document.getElementById("include_image").checked = true;
+                document.getElementById('img_path').style.display = "block";
+                document.getElementById('image_path_holder').style.display = "block";
+                document.getElementById('image_holder').style.display = "block";
+            }else{
+                if($(this).data('imgpath') !== ""){
+                    document.getElementById('img_path').style.display = "block";
+                    document.getElementById('image_path_holder').style.display = "block";
+                    document.getElementById('image_holder').style.display = "block";
+                }else{
+                    document.getElementById("include_image").checked = false;
+                    document.getElementById('img_path').style.display = "none";
+                    document.getElementById('image_path_holder').style.display = "none";
+                }
+
+            }
+
+            $('[id="link_id"]').val(ID);
 
             var css_title = JSON.parse(JSON.stringify($(this).data('titlecss')));
             console.log(css_title);

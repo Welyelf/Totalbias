@@ -1,5 +1,5 @@
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.3/css/bootstrap-colorpicker.min.css" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.3/js/bootstrap-colorpicker.min.js"></script>
 
@@ -76,6 +76,25 @@
                                             <option value="<?php echo select_option($ffl,FALSE); ?>" <?php if(isset($settings->value) && $settings->value==select_option($ffl,FALSE))echo 'selected="selected"'; ?>>
                                                 <?php echo select_option($ffl,FALSE); ?>
                                             </option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        <?php
+                    }else if($settings->name == "title_font_weight"){
+                        ?>
+                        <div class="form-group row">
+                            <div class="col-md-4">
+                                <label for="author" class="col-form-label-mini"><?php echo $settings->display_name; ?></label>
+                                <select class="form-control" name="<?php echo $settings->name; ?>">
+                                    <?php
+                                    for ($ffl=0;$ffl<font_weight_list($ffl,TRUE);$ffl++){
+                                        ?>
+                                        <option value="<?php echo font_weight_list($ffl,FALSE); ?>" <?php if(isset($settings->value) && $settings->value==font_weight_list($ffl,FALSE))echo 'selected="selected"'; ?>>
+                                            <?php echo font_weight_list($ffl,FALSE); ?>
+                                        </option>
                                         <?php
                                     }
                                     ?>

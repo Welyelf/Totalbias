@@ -17,9 +17,10 @@
     </head>
 
     <body class="" style="background-color: #fff !important;">
-        <div class="wrapper ">
-            <div class="container ">
-            <div class="main-panel" >
+        <div class="wrapper">
+            <div class="container-fluid">
+
+            <div class="main-panel">
 
             <div class="content" style="margin-top: 13px !important;">
                 <div class="row">
@@ -32,6 +33,7 @@
                     </div>
 
                     <div class="col-lg-12 col-md-12 col-sm-12">
+                        <?php echo date("F d, Y"); ?>
                         <hr >
                     </div>
 
@@ -71,7 +73,7 @@
                             ©
                             <script>
                               document.write(new Date().getFullYear())
-                            </script>. Totalbias
+                            </script>. Totalbias.com
                           </span>
                         </div>
                     </div>
@@ -81,6 +83,7 @@
         </div>
         </div>
         </div>
+
         <!--   Core JS Files   -->
         <script src="assets/js/core/jquery.min.js"></script>
         <script src="assets/js/core/popper.min.js"></script>
@@ -184,19 +187,31 @@
 </html>
 
 <style>
+    .responsive {
+        width: 70%;
+        max-width: 400px;
+        height: 150px;
+        display: block;
+        margin-left: 15px;
+    }
+    body{
+        clear:both;
+    }
     .link_title ,h4,.h4{
         font-family: <?php echo $settings->title_font; ?> !important;
         font-size: <?php echo $settings->title_font_size; ?>px !important;
         color : <?php echo $settings->title_font_color; ?> !important;
-        margin-top: <?php echo $settings->vertical_spacing_between_articles; ?>px !important ;
+        margin-top: -<?php echo $settings->vertical_spacing_between_articles; ?>px !important ;
         margin-bottom: <?php echo $settings->vertical_spacing_between_title_and_pub; ?>px !important ;
+        font-weight: <?php echo $settings->title_font_weight; ?> !important; ;
     }
     .link_title:hover{
-        color : <?php echo $settings->title_font_color_hover; ?> !important;
+
 
     }
     a:hover {
         text-decoration: <?php if($settings->title_underline_on_hover == "Yes"){echo "underline";}else{echo "none";} ?> ;
+        color : <?php echo $settings->title_font_color_hover; ?> !important;
     }
 
     #publisher{
@@ -217,16 +232,25 @@
     hr {
         position: relative;
         border: none;
-        height: 3px;
+        height: 1.5px;
         background: black;
     }
     a {
         text-decoration: none;
         color:#000;
     }
-
+    .col-sm-12{
+        padding-right: 1px !important;
+        padding-left: 1px !important;
+    }
+    @media (max-width: 768px)and (min-width: 322px)  {
+        .main-panel{
+            padding-left: 0 !important;
+        }
+    }
 
     @media (max-width: 991px) {
+
         .range_slider {
             width:100% !important;
         }
@@ -248,6 +272,7 @@
     }
     .totalbias_logo{
         width:50%;
+        height: 50%;
     }
 
     .red_slider{
