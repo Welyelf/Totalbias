@@ -20,30 +20,52 @@ echo $_SERVER['REQUEST_URI'];
 </div>
 <div class="sidebar-wrapper">
     <ul class="nav">
-        <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/dashboard"){echo "active";} ?>">
-            <a href="<?php echo base_url('/administrator/dashboard'); ?>">
-                <i class="nc-icon nc-bank"></i>
-                <p>Dashboard</p>
-            </a>
-        </li>
+        <?php
+        if($this->auth->check_if_superadmin()){
+            ?>
+            <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/dashboard"){echo "active";} ?>">
+                <a href="<?php echo base_url('/administrator/dashboard'); ?>">
+                    <i class="nc-icon nc-bank"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <?php
+
+        }
+        ?>
+
         <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/column1"){echo "active";} ?>">
             <a href="<?php echo base_url('/administrator/column1'); ?>">
                 <i class="nc-icon nc-tile-56"></i>
                 <p>Links</p>
             </a>
         </li>
-        <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/scoring"){echo "active";} ?>">
-            <a href="<?php echo base_url('/administrator/scoring'); ?>">
-                <i class="nc-icon nc-paper"></i>
-                <p>Scoring Algorithm</p>
-            </a>
-        </li>
-        <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/settings" || $_SERVER['REQUEST_URI']== "/administrator/settings/add" || $_SERVER['REQUEST_URI']== "/administrator/settings/edit"){echo "active";} ?>">
-            <a href="<?php echo base_url('/administrator/settings'); ?>">
-                <i class="nc-icon nc-settings-gear-65"></i>
-                <p>Settings</p>
-            </a>
-        </li>
+        <?php
+            if($this->auth->check_if_superadmin()){
+                ?>
+                    <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/scoring"){echo "active";} ?>">
+                        <a href="<?php echo base_url('/administrator/scoring'); ?>">
+                            <i class="nc-icon nc-paper"></i>
+                            <p>Scoring Algorithm</p>
+                        </a>
+                    </li>
+                    <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/settings" || $_SERVER['REQUEST_URI']== "/administrator/settings/add" || $_SERVER['REQUEST_URI']== "/administrator/settings/edit"){echo "active";} ?>">
+                        <a href="<?php echo base_url('/administrator/settings'); ?>">
+                            <i class="nc-icon nc-settings-gear-65"></i>
+                            <p>Settings</p>
+                        </a>
+                    </li>
+                <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/users"){echo "active";} ?>">
+                    <a href="<?php echo base_url('/administrator/users'); ?>">
+                        <i class="nc-icon nc-circle-10"></i>
+                        <p>Users</p>
+                    </a>
+                </li>
+                <?php
+            }
+        ?>
+
+
         <li class="active-pro">
             <center><span class="copyright">
                 ©

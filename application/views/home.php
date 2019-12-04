@@ -1,30 +1,3 @@
-<?php
-//$str = "Property Features: Great Waltham is a lovely village which is 5 miles from the commuter town of Chelmsford, Essex. Chelmsford is an affluent town with links to all the main routes and less than an hour from London. The Beehive has two separate bars: the drinking room which has a pool and darts area at the end, leading directly onto the garden area. This garden is to the rear of the pub and is tidy but has plenty more potential, there is also a nice garden at the front with a large purpose-built smoking shelter. The second bar is set up in the style of a 36 restaurant and is ideal for future food sales, functions or community meetings. This pub is in a great area and an amazing footprint and has heaps of potential. Trading Style: The pub is predominately wet-led and appeals to local people from the village, the pub has started to offer food and is beginning to utilize all aspects that the business can offer. The ideal applicants would have the ability and ambition to take this pub and maximise all types of offers that are available, as well as the ability to integrate and become an integral part of this great village community. Private Accommodation: This consists of two double bedrooms, a lounge, kitchen, bathroom with separate toilet and there is an office space on the large landing. There is the benefit of plenty of storage as there is a large attic space which is accessible from both the lounge and bedroom one.";
-//
-//if (strpos($str, 'Private Accommodation:') !== false) {
-//    echo 'true';
-//}
-//
-//
-//
-//$uid = "855FM22";
-//
-//
-//$split_for_pf = explode("Trading Style:",$str);
-//
-//
-//$pf = explode("Trading Style:",$str);
-//echo "<br>";
-//echo("Property Features:" . $pf[0]);
-//$split_for_pa = explode("Private Accommodation:",$pf[1]);
-//
-//echo "<br>";
-//echo("Trading Style:" . $split_for_pa[0]);
-//
-//echo "<br>";
-//echo("Private Accommodation:" . $split_for_pa[1]);
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +14,6 @@
         <link href="/assets/css/totalbias.css?v=2.0.0" rel="stylesheet" />
         <link href="/assets/demo/demo.css" rel="stylesheet" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-
     </head>
 
     <body class="" style="background-color: #fff !important;">
@@ -134,7 +106,15 @@
                     $("#columnA_data").empty();
                     $("#columnB_data").empty();
                     $("#columnC_data").empty();
-                    show_columnA_data();
+                    show_columnA_data()
+                    //alert(this.value);
+                    if(this.value == 4 || this.value == 4){
+                        document.getElementById('customRange2').className = 'red_slider';
+                    }else if(this.value == 3){
+                        document.getElementById('customRange2').className = 'slider';
+                    }else if(this.value == 1 || this.value == 2){
+                        document.getElementById('customRange2').className = 'blue_slider';
+                    }
                 }
                 function show_columnA_data(){
 
@@ -204,6 +184,33 @@
 </html>
 
 <style>
+    .link_title ,h4,.h4{
+        font-family: <?php echo $settings->title_font; ?> !important;
+        font-size: <?php echo $settings->title_font_size; ?>px !important;
+        color : <?php echo $settings->title_font_color; ?> !important;
+        margin-top: <?php echo $settings->vertical_spacing_between_articles; ?>px !important ;
+        margin-bottom: <?php echo $settings->vertical_spacing_between_title_and_pub; ?>px !important ;
+    }
+    .link_title:hover{
+        color : <?php echo $settings->title_font_color_hover; ?> !important;
+
+    }
+    a:hover {
+        text-decoration: <?php if($settings->title_underline_on_hover == "Yes"){echo "underline";}else{echo "none";} ?> ;
+    }
+
+    #publisher{
+        font-family: <?php echo $settings->publisher_font; ?> !important;
+        font-size: <?php echo $settings->publisher_font_size; ?>px !important;
+        color : <?php echo $settings->publisher_font_color; ?> !important;
+
+    }
+
+    #author{
+        font-family: <?php echo $settings->author_font; ?> !important;
+        font-size: <?php echo $settings->author_font_size; ?>px !important;
+        color : <?php echo $settings->author_font_color; ?> !important;
+    }
     .hover_effect:hover,.hover_effect:focus {
         color:#801212!important
     }
@@ -217,13 +224,8 @@
         text-decoration: none;
         color:#000;
     }
-    a:hover {
-        text-decoration: underline;
-    }
-    #publisher{
-        color:#d3d3d3;
-        font-size: 16px;
-    }
+
+
     @media (max-width: 991px) {
         .range_slider {
             width:100% !important;
@@ -248,10 +250,39 @@
         width:50%;
     }
 
-    #customRange2{
-        width:50%;
-        height: 10px;
-        display: inline-block !important
+    .red_slider{
+        -webkit-appearance: none;
+        width: 100%;
+        height: 25px;
+        background: #d3d3d3;
+        outline: none;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    .red_slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 25px;
+        height: 25px;
+        background: #900;
+        cursor: pointer;
+    }
+    .blue_slider{
+        -webkit-appearance: none;
+        width: 100%;
+        height: 25px;
+        background: #d3d3d3;
+        outline: none;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+    }
+
+    .blue_slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 25px;
+        height: 25px;
+        background: #003366;
+        cursor: pointer;
     }
     .slider {
         -webkit-appearance: none;
@@ -259,29 +290,29 @@
         height: 25px;
         background: #d3d3d3;
         outline: none;
-        opacity: 0.7;
         -webkit-transition: .2s;
         transition: opacity .2s;
     }
 
-    .slider:hover {
-        opacity: 1;
-    }
 
     .slider::-webkit-slider-thumb {
         -webkit-appearance: none;
-        appearance: none;
         width: 25px;
         height: 25px;
         background: #003366;
         cursor: pointer;
+        background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(153,0,0,1) 51%);
     }
 
     .slider::-moz-range-thumb {
         width: 25px;
         height: 25px;
-        background: #4CAF50;
         cursor: pointer;
+    }
+    #customRange2{
+        width:50%;
+        height: 10px;
+        display: inline-block !important;
     }
 
 </style>
