@@ -15,7 +15,7 @@ class Totalbias extends CI_Controller {
         parent::__construct();
         $this->load->model('Links_model', 'links');
         $this->load->model('Settings_model', 'settings_model');
-
+        $this->load->model('Hits_model', 'hits_model');
     }
 
     public function index()
@@ -27,8 +27,25 @@ class Totalbias extends CI_Controller {
         $this->data['settings'] = (object)$this->settings;
         //$setting= (object)$this->settings;
         //echo $setting->column1_limit;
-
-
+		//strtotime(date('d-M-Y'))
+		
+		$today = date("d-M-Y");
+		if($this->session->visited !== "1"){
+			if(empty($this->hits_model->get_today_hits())){
+				$this->hits_model->add(1);
+				
+			}else{
+				$today_hits = $this->hits_model->get_today_hits();
+				//echo $today_hits->count;
+				$this->hits_model->update_count($today_hits->count + 1);
+				//echo "naay today";
+			}
+			$this->session->set_userdata('visited', '1');
+		}else{
+			//$today_hits = $this->hits_model->get_today_hits();
+			//echo $today_hits->count;
+		}
+		
         $this->load->view('home', $this->data);
     }
 
@@ -93,11 +110,11 @@ class Totalbias extends CI_Controller {
 
             if($data_link->img_display == 1){
                 $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><img src='$data_link->img_path' alt='$data_link->title' class='responsive'/><br><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
-                <small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small> </div></div></div>";
+                <div  id='publisher2'><small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small></div> </div></div></div>";
             }
             else{
                 $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
-                <small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small> </div></div></div>";
+                <div  id='publisher2'><small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small></div> </div></div></div>";
 
             }
 

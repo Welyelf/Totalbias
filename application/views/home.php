@@ -17,11 +17,13 @@
     </head>
 
     <body class="" style="background-color: #fff !important;">
-        <div class="wrapper">
+       
+		<div class="wrapper">
             <div class="container-fluid">
 
             <div class="main-panel">
-
+			 
+			
             <div class="content" style="margin-top: 13px !important;">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 range_slider" style="">
@@ -32,9 +34,10 @@
                         <p class="hidden">Value: <span id="demo"></span></p>
                     </div>
 
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                        <?php echo date("F d, Y"); ?>
-                        <hr >
+                    <div class="col-md-12 current-date">
+                        <div><?php echo date("F d, Y"); ?></div>
+
+                        <div ><hr></div>
                     </div>
 
                     <div class="col-lg-4 col-md-12 col-sm-12">
@@ -59,13 +62,15 @@
 
                         </div>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-md-12">
                         <hr >
                     </div>
                 </div>
+                <div id="amzn-assoc-ad-8d82f34b-639e-41fd-995d-a27047080e80"></div>
+                <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=8d82f34b-639e-41fd-995d-a27047080e80"></script>
 
 
-            <footer class="footer footer-black  footer-white ">
+                <footer class="footer footer-black  footer-white ">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="credits ml-auto">
@@ -187,6 +192,11 @@
 </html>
 
 <style>
+    .current-date{
+        font-family: <?php echo $settings->title_font; ?> !important;
+        font-size: <?php echo $settings->title_font_size; ?>px !important;
+        color : <?php echo $settings->title_font_color; ?> !important;
+    }
     .responsive {
         width: 70%;
         max-width: 400px;
@@ -202,7 +212,6 @@
         font-size: <?php echo $settings->title_font_size; ?>px !important;
         color : <?php echo $settings->title_font_color; ?> !important;
         margin-top: -<?php echo $settings->vertical_spacing_between_articles; ?>px !important ;
-        margin-bottom: <?php echo $settings->vertical_spacing_between_title_and_pub; ?>px !important ;
         font-weight: <?php echo $settings->title_font_weight; ?> !important; ;
     }
     .link_title:hover{
@@ -220,7 +229,9 @@
         color : <?php echo $settings->publisher_font_color; ?> !important;
 
     }
-
+    #publisher2{
+        margin-top: -<?php echo $settings->vertical_spacing_between_title_and_pub; ?>px !important ;
+    }
     #author{
         font-family: <?php echo $settings->author_font; ?> !important;
         font-size: <?php echo $settings->author_font_size; ?>px !important;
@@ -234,6 +245,7 @@
         border: none;
         height: 1.5px;
         background: black;
+        margin-top: 1px !important;
     }
     a {
         text-decoration: none;
@@ -271,10 +283,14 @@
         margin: 0 auto;
     }
     .totalbias_logo{
-        width:50%;
-        height: 50%;
+        width:40%;
+        height: 40%;
     }
-
+    #customRange2{
+        width:40%;
+        height: 10px;
+        display: inline-block !important;
+    }
     .red_slider{
         -webkit-appearance: none;
         width: 100%;
@@ -334,10 +350,6 @@
         height: 25px;
         cursor: pointer;
     }
-    #customRange2{
-        width:50%;
-        height: 10px;
-        display: inline-block !important;
-    }
+
 
 </style>
