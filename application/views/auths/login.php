@@ -28,12 +28,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-laravel">
-    <div class="container">
-        <a class="navbar-brand" href="#">Totalbias Login</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
+
 </nav>
 
 <main class="login-form">
@@ -42,6 +37,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">Welcome to Totalbias Administrator</div>
+
                     <div class="card-body">
                         <?php if (isset($error)) { ?>
                             <div class="alert alert-danger alert-dismissible" role="alert">
@@ -70,12 +66,22 @@
                                     Login
                                 </button>
                             </div>
+                        </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
+            <center><img src="../assets/img/tb.png" class="totalbias_logo" height="100" width="100">
+                <div class="credits ml-auto">
+                              <span class="copyright">
+                                ©
+                                <script>
+                                  document.write(new Date().getFullYear())
+                                </script>. TotalBias.com
+                              </span>
+                </div>
+                </center>
         </div>
-    </div>
     </div>
 
 </main>
@@ -103,8 +109,6 @@
         text-align: left;
         background-color: #f5f8fa;
     }
-
-
 
     .my-form
     {

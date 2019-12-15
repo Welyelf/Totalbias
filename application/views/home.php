@@ -78,7 +78,7 @@
                             ©
                             <script>
                               document.write(new Date().getFullYear())
-                            </script>. Totalbias.com
+                            </script>. TotalBias.com
                           </span>
                         </div>
                     </div>

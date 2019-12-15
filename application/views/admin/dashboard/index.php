@@ -15,7 +15,7 @@
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category"><?php  echo date('F d,Y', $now); ?></p>
-                      <p class="card-title"><?php echo $total_this_day->count; ?>
+                      <p class="card-title"><?php if(isset($total_this_day->count)){echo $total_this_day->count;}else{echo "0";} ?>
                         <p>
                     </div>
                   </div>
