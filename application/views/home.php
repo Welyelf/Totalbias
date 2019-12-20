@@ -23,11 +23,15 @@
 
             <div class="content" style="margin-top: 13px !important;">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 range_slider" style="">
+                    <div class="col-lg-12 col-md-12 col-sm-12 range_slider" style="text-align: center;">
                         <img src="/assets/img/tb1.png" class="totalbias_logo">
-                            <br><br>
-                        <b style="color:#036;">More Liberal <<</b> <input type="range" class="slider" min="1" max="5" id="customRange2" > <b style="color:#900;">>> More Conservative</b>
-                            <br><br>
+                            <br> <br>
+                        <div>
+                        <small id="more_liberal" style="color:#036;padding-left: 40px;font-size: 14px;">More Liberal << </small>
+                            <input type="range" class="slider" min="1" max="5" id="customRange2">
+                        <small id="more_conservative" style="color:#900;font-size: 14px;">>> More Conservative</small>
+                        </div>
+                        <br><br>
                         <p class="hidden">Value: <span id="demo"></span></p>
                     </div>
                     <div class="col-md-12 current-date">
@@ -190,7 +194,7 @@
 
 <style>
     .header_column{
-        height : 45px;
+
     }
 
     .current-date{
@@ -271,6 +275,21 @@
         }
         #customRange2{
             width:100% !important;
+            padding-left: 0px !important;
+
+        }
+        #more_liberal{
+
+            position: absolute;
+            margin-top : 20px !important;
+            padding-left: 0px !important;
+
+        }
+        #more_conservative{
+            display: block;
+            margin-top : 0px !important;
+            float:right !important;
+            text-align: center;
         }
     }
     .main-panel{
@@ -285,13 +304,13 @@
     }
     .totalbias_logo{
         width:40%;
-        height: 40%;
+        height: 45%;
     }
     #customRange2{
         width:40%;
         height: 10px;
         display: inline-block !important;
-        padding-left: 40px;
+
     }
     .red_slider{
         -webkit-appearance: none;
