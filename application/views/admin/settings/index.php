@@ -64,7 +64,7 @@
                             </div>
                         </div>
                         <?php
-                    }else if($settings->name == "title_underline_on_hover"){
+                    }else if($settings->name == "title_underline_on_hover" || $settings->name == "title_underline_option"){
                         ?>
                         <div class="form-group row">
                             <div class="col-md-4">

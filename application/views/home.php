@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,30 +16,26 @@
     </head>
 
     <body class="" style="background-color: #fff !important;">
-       
-		<div class="wrapper">
+        <div class="wrapper">
             <div class="container-fluid">
 
             <div class="main-panel">
-			 
-			
+
             <div class="content" style="margin-top: 13px !important;">
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 range_slider" style="">
                         <img src="/assets/img/tb1.png" class="totalbias_logo">
                             <br><br>
-                            <input type="range" class="slider" min="1" max="5" id="customRange2"  />
+                        <b style="color:#036;">More Liberal <<</b> <input type="range" class="slider" min="1" max="5" id="customRange2" > <b style="color:#900;">>> More Conservative</b>
                             <br><br>
                         <p class="hidden">Value: <span id="demo"></span></p>
                     </div>
-
                     <div class="col-md-12 current-date">
-                        <div><?php echo date("F d, Y"); ?></div>
-
-                        <div ><hr></div>
+                       <!-- <div><?php echo date("F d, Y"); ?></div>
+                        <div ><hr></div>-->
                     </div>
-
                     <div class="col-lg-4 col-md-12 col-sm-12">
+                        <img src="/assets/img/News.png" class="header_column">
                         <div class="card-stats">
                             <div class="card-body" id="columnA_data">
 
@@ -48,6 +43,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
+                        <img src="/assets/img/Videos.png" class="header_column">
                         <div class="card-stats">
                             <div class="card-body " id="columnB_data">
 
@@ -55,6 +51,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
+                        <img src="/assets/img/Podcasts.png" class="header_column">
                         <div class="card-stats">
                             <div class="card-body " id="columnC_data">
 
@@ -192,6 +189,10 @@
 </html>
 
 <style>
+    .header_column{
+        height : 45px;
+    }
+
     .current-date{
         font-family: <?php echo $settings->title_font; ?> !important;
         font-size: <?php echo $settings->title_font_size; ?>px !important;
@@ -200,7 +201,7 @@
     .responsive {
         width: 70%;
         max-width: 400px;
-        height: 150px;
+        height: 200px;
         display: block;
         margin-left: 15px;
     }
@@ -215,12 +216,11 @@
         font-weight: <?php echo $settings->title_font_weight; ?> !important; ;
     }
     .link_title:hover{
-
-
+        color : <?php echo $settings->title_font_color_hover; ?> !important;
     }
     a:hover {
         text-decoration: <?php if($settings->title_underline_on_hover == "Yes"){echo "underline";}else{echo "none";} ?> ;
-        color : <?php echo $settings->title_font_color_hover; ?> !important;
+        color : #036;
     }
 
     #publisher{
@@ -238,7 +238,7 @@
         color : <?php echo $settings->author_font_color; ?> !important;
     }
     .hover_effect:hover,.hover_effect:focus {
-        color:#801212!important
+        color:#801212 !important;
     }
     hr {
         position: relative;
@@ -248,7 +248,7 @@
         margin-top: 1px !important;
     }
     a {
-        text-decoration: none;
+        text-decoration: <?php if($settings->title_underline_option == "Yes"){echo "underline";}else{echo "none";} ?> ;;
         color:#000;
     }
     .col-sm-12{
@@ -277,10 +277,11 @@
         width: calc(100%) !important;
     }
     .range_slider{
-        width:50%;
+        width:40%;
         text-align: center !important;
         display: inline-block !important;
         margin: 0 auto;
+
     }
     .totalbias_logo{
         width:40%;
@@ -290,6 +291,7 @@
         width:40%;
         height: 10px;
         display: inline-block !important;
+        padding-left: 40px;
     }
     .red_slider{
         -webkit-appearance: none;

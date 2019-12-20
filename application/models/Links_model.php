@@ -43,9 +43,9 @@ class Links_model extends CI_Model
         $this->db->update($this->table);
     }
 
-    public function get_all_c1()
+    public function get_all_articles($col)
     {
-        //$this->db->where('column_num', "1");
+        $this->db->where('column_num', $col);
         $this->db->order_by('id','DESC');
         $query = $this->db->get($this->table);
         return $query->result();

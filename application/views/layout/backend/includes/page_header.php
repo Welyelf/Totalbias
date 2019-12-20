@@ -16,6 +16,8 @@
                             echo "Dashboard";
                     } else  if($_SERVER['REQUEST_URI']== "/administrator/column1"){
                         echo "Links";
+                    }else  if($_SERVER['REQUEST_URI']== "/administrator/scoring"){
+                        echo "Scoring Algorithm";
                     }
 
                     ?>

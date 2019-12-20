@@ -4,14 +4,55 @@
     $(document).ready( function () {
 
         $('input[type="checkbox"]').on('change', function () {
-            //$('input[type="checkbox"]').not(this).prop('checked', false);
-            //var checkedValue = document.querySelector('.include_image:checked').value;
             if ((this).checked == true){
-                document.getElementById('img_path').style.display = "block";
+                var url = document.getElementById("url").value;
+                console.log(url);
+                if(url === ""){
+                   // alert_user("Error!","You must put a valid url first.");
+                    Swal.fire({
+                        title: "Error!",
+                        text: "You must put a valid url first.",
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonText: 'OK'
+                    })
+                    document.getElementById("include_image").checked = false;
+                }else {
+                    var img_path =   document.getElementById("image-path").innerHTML;
+
+
+                        var ajaxdata = {
+                            url_data : url,
+                        };
+                        $.ajax({
+                            url: '/admin/column1/get_file_content',
+                            type: "post",
+                            beforeSend: showProcessing,
+                            data: ajaxdata,
+                            success: function (data) {
+                                showDoneProcessing();
+                                $("#article_image").attr('src','data:image/jpeg;base64,'+data+' ');
+                                document.getElementById('image_holder').style.display = "block";
+                                document.getElementById("image-path").innerHTML = 'data:image/jpeg;base64,'+data+' ';
+                                //document.getElementById('image_path_holder').style.display = "block";
+                                //console.log(data);
+                            }
+                        });
+                    //document.getElementById('image_holder').style.display = "block";
+                }
+                //document.getElementById('img_path').style.display = "block";
             }else{
                 document.getElementById('img_path').style.display = "none";
+                document.getElementById('image_holder').style.display = "none";
             }
         });
+
+        function showProcessing() {
+            document.getElementById('loader').style.display = "block";
+        }
+        function showDoneProcessing() {
+            document.getElementById('loader').style.display = "none";
+        }
 
         $('#submit_form').submit(function(e){
 
@@ -19,28 +60,11 @@
             var is_img_show;
             var image_path="";
             var img_path_from_db = document.getElementById("image-path").innerHTML;
-            if(img_path_from_db !== ""){
-                image_path = img_path_from_db;
-            }
+            image_path = img_path_from_db;
 
             //alert("Girls Like You");
             if (document.getElementById('include_image').checked) {
                 is_img_show = 1;
-                var img = document.getElementById("img_path").value;
-                if(img!==""){
-                    $.ajax({
-                        url:'/admin/column1/upload_pic',
-                        type:"post",
-                        data:new FormData(this),
-                        processData:false,
-                        contentType:false,
-                        cache:false,
-                        async:false,
-                        success: function(data){
-                            image_path = data;
-                        }
-                    });
-                }
             }else{
                 is_img_show = 0;
             }
@@ -82,6 +106,20 @@
             "pageLength": 1000,
             "order": [[ 0, "desc" ]]
         });
+
+        var table2 = $('#column2').DataTable({
+            paginate: true,
+            "lengthChange": false,
+            "pageLength": 1000,
+            "order": [[ 0, "desc" ]]
+        });
+
+        var table3 = $('#column3').DataTable({
+            paginate: true,
+            "lengthChange": false,
+            "pageLength": 1000,
+            "order": [[ 0, "desc" ]]
+        });
         // $('#column1 tbody').on('click', 'tr', function () {
         //     var data = table.row( this ).data();
         //     //alert( 'You clicked on '+data[0]+'\'s row' );
@@ -101,17 +139,17 @@
 
             if($(this).data('imgdisplay')===1){
                 document.getElementById("include_image").checked = true;
-                document.getElementById('img_path').style.display = "block";
-                document.getElementById('image_path_holder').style.display = "block";
+                //document.getElementById('img_path').style.display = "block";
+                //document.getElementById('image_path_holder').style.display = "block";
                 document.getElementById('image_holder').style.display = "block";
             }else{
                 if($(this).data('imgpath') !== ""){
-                    document.getElementById('img_path').style.display = "block";
-                    document.getElementById('image_path_holder').style.display = "block";
+                   // document.getElementById('img_path').style.display = "block";
+                    //document.getElementById('image_path_holder').style.display = "block";
                     document.getElementById('image_holder').style.display = "block";
                 }else{
                     document.getElementById("include_image").checked = false;
-                    document.getElementById('img_path').style.display = "none";
+                   // document.getElementById('img_path').style.display = "none";
                     document.getElementById('image_path_holder').style.display = "none";
                 }
 
@@ -120,22 +158,16 @@
             $('[id="link_id"]').val(ID);
 
             var css_title = JSON.parse(JSON.stringify($(this).data('titlecss')));
-            console.log(css_title);
-            console.log(css_title.font_size);
             $('[id="font_size_title"]').val(css_title.font_size);
             $('[id="color_title"]').val(css_title.font_color);
             $('[id="hover_title_color"]').val(css_title.hover_color);
 
             var css_publisher = JSON.parse(JSON.stringify($(this).data('pubcss')));
-            console.log(css_publisher);
-            console.log(css_publisher.font_size);
             $('[id="font_size_pub"]').val(css_publisher.font_size);
             $('[id="color_pub"]').val(css_publisher.font_color);
             $('[id="hover_pub_color"]').val(css_publisher.hover_color);
 
             var css_author = JSON.parse(JSON.stringify($(this).data('authorcss')));
-            console.log(css_author);
-            console.log(css_author.font_size);
             $('[id="font_size_author"]').val(css_author.font_size);
             $('[id="color_author"]').val(css_author.font_color);
             $('[id="hover_author_color"]').val(css_author.hover_color);

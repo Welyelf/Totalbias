@@ -31,7 +31,7 @@ class Totalbias extends CI_Controller {
 		
 		$today = date("d-M-Y");
 		if($this->session->visited !== "1"){
-			if(empty($this->hits_model->get_today_hits())){
+			if(empty($this->hits_model->get_today_hits())) {
 				$this->hits_model->add(1);
 				
 			}else{
@@ -45,7 +45,6 @@ class Totalbias extends CI_Controller {
 			//$today_hits = $this->hits_model->get_today_hits();
 			//echo $today_hits->count;
 		}
-		
         $this->load->view('home', $this->data);
     }
 
@@ -71,13 +70,13 @@ class Totalbias extends CI_Controller {
 
 
             if(isset($title_css['font_size'])){
-                $title_css_assign = $title_css_assign ."font-size:".$title_css['font_size']."px;";
+                $title_css_assign = $title_css_assign ."font-size:".$title_css['font_size']."px !important;";
             }
             if(isset($title_css['font_color'])){
-                $title_css_assign = $title_css_assign ."color:".$title_css['font_color'].";";
+                $title_css_assign = $title_css_assign ."color:".$title_css['font_color']." !important;";
             }
             if(isset($title_css['hover_color'])){
-                $title_css_assign_hover = "style='a:hover,a:focus{color:".$title_css['hover_color']."!important}'";
+              //  $title_css_assign_hover = "style='a:hover,a:focus{color:".$title_css['hover_color']."!important}'";
             }
 
 
@@ -90,21 +89,19 @@ class Totalbias extends CI_Controller {
             $author_css_assign = "style=";
             $author_css_assign_hover="";
             if(isset($author_css['font_size'])){
-                $author_css_assign = $author_css_assign ."font-size:".$author_css['font_size']."px;";
+                $author_css_assign = $author_css_assign ."font-size:".$author_css['font_size']."px !important;";
             }
             if(isset($author_css['font_color'])){
-                $author_css_assign = $author_css_assign ."color:".$author_css['font_color'].";";
+                $author_css_assign = $author_css_assign ."color:".$author_css['font_color']." !important;";
             }
-
-
             $publisher_css = (array) json_decode($data_link->publisher_css,TRUE);
             $publisher_css_assign = "style=";
             $publisher_css_assign_hover="";
             if(isset($publisher_css['font_size'])){
-                $publisher_css_assign = $publisher_css_assign ."font-size:".$publisher_css['font_size']."px;";
+                $publisher_css_assign = $publisher_css_assign ."font-size:".$publisher_css['font_size']."px !important;";
             }
             if(isset($publisher_css['font_color'])){
-                $publisher_css_assign = $publisher_css_assign ."color:".$publisher_css['font_color'].";";
+                $publisher_css_assign = $publisher_css_assign ."color:".$publisher_css['font_color']." !important;";
             }
 
 

@@ -8,15 +8,10 @@ echo $_SERVER['REQUEST_URI'];
 ?>
 
 <div class="logo">
-    <a  class="simple-text logo-mini">
+   <div class="logo-image-big">
+           <img src="/assets/img/tb1.png" width="250">
+        </div>
 
-    </a>
-    <a href="/administrator/dashboard" class="simple-text logo-normal">
-        Totalbias
-        <!-- <div class="logo-image-big">
-          <img src="../assets/img/logo-big.png">
-        </div> -->
-    </a>
 </div>
 <div class="sidebar-wrapper">
     <ul class="nav">
@@ -30,10 +25,8 @@ echo $_SERVER['REQUEST_URI'];
                 </a>
             </li>
             <?php
-
         }
         ?>
-
         <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/column1"){echo "active";} ?>">
             <a href="<?php echo base_url('/administrator/column1'); ?>">
                 <i class="nc-icon nc-tile-56"></i>
