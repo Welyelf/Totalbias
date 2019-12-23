@@ -194,7 +194,7 @@
 
 <style>
     .header_column{
-
+        width:95%;
     }
 
     .current-date{
