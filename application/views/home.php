@@ -12,6 +12,8 @@
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/assets/css/totalbias.css?v=2.0.0" rel="stylesheet" />
         <link href="/assets/demo/demo.css" rel="stylesheet" />
+        <link href="/assets/demo/rangeslider.css" rel="stylesheet" />
+
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     </head>
 
@@ -28,39 +30,79 @@
                             <br> <br>
                         <div>
                         <small id="more_liberal" style="color:#036;padding-left: 40px;font-size: 14px;">More Liberal << </small>
-                            <input type="range" class="slider" min="1" max="5" id="customRange2">
+                            <input type="range" class="slider" min="1" step="1" max="5" id="customRange2" data-rangeslider>
                         <small id="more_conservative" style="color:#900;font-size: 14px;">>> More Conservative</small>
                         </div>
                         <br><br>
-                        <p class="hidden">Value: <span id="demo"></span></p>
+
                     </div>
                     <div class="col-md-12 current-date">
                        <!-- <div><?php echo date("F d, Y"); ?></div>
                         <div ><hr></div>-->
                     </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <img src="/assets/img/News.png" class="header_column">
-                        <div class="card-stats">
-                            <div class="card-body" id="columnA_data">
+                    <div class="col-lg-12 col-md-12 col-sm-12" id="mobile_view">
+                        <div class="warpper">
+                            <input class="radio" id="one" name="group" type="radio" checked>
+                            <input class="radio" id="two" name="group" type="radio">
+                            <input class="radio" id="three" name="group" type="radio">
+                            <div class="tabs">
+                                <label class="tab" id="one-tab" for="one">NEWS</label>
+                                <label class="tab" id="two-tab" for="two">VIDEOS</label>
+                                <label class="tab" id="three-tab" for="three">PODCASTS</label>
+                                <br><br>
+                            </div>
+                            <div class="panels">
+                                <div class="panel" id="one-panel">
+                                    <div class="card-stats">
+                                        <div class="card-body" id="columnA_data2">
 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel" id="two-panel">
+                                    <div class="card-stats">
+                                        <div class="card-body " id="columnB_data2">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel" id="three-panel">
+                                    <div class="card-stats">
+                                        <div class="card-body " id="columnC_data2">
+
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <img src="/assets/img/Videos.png" class="header_column">
-                        <div class="card-stats">
-                            <div class="card-body " id="columnB_data">
+                    <div id="desktop_view">
 
+                        <div class="col-lg-4 col-md-12 col-sm-12" id="one-panel">
+                            <img src="/assets/img/News.png" class="header_column">
+                            <div class="card-stats">
+                                <div class="card-body" id="columnA_data">
+
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12">
-                        <img src="/assets/img/Podcasts.png" class="header_column">
-                        <div class="card-stats">
-                            <div class="card-body " id="columnC_data">
+                        <div class="col-lg-4 col-md-12 col-sm-12" id="two-panel">
+                            <img src="/assets/img/Videos.png" class="header_column">
+                            <div class="card-stats">
+                                <div class="card-body " id="columnB_data">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 col-sm-12" id="three-panel">
+                            <img src="/assets/img/Podcasts.png" class="header_column">
+                            <div class="card-stats">
+                                <div class="card-body " id="columnC_data">
+
+                                </div>
 
                             </div>
-
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -98,8 +140,11 @@
 
 
         <script src="assets/demo/demo.js"></script>
+        <script src="assets/demo/rangeslider.min.js"></script>
 
         <script type="text/javascript">
+
+
             $(document).ready( function () {
 
                 show_columnA_data();
@@ -109,12 +154,15 @@
                 }
                 var x = document.getElementById("customRange2");
 
-                document.getElementById("demo").innerHTML = x.value;
+                //document.getElementById("demo").innerHTML = x.value;
                 x.oninput = function() {
-                    document.getElementById("demo").innerHTML = this.value;
+                    //document.getElementById("demo").innerHTML = this.value;
                     $("#columnA_data").empty();
+                    $("#columnA_data2").empty();
                     $("#columnB_data").empty();
+                    $("#columnB_data2").empty();
                     $("#columnC_data").empty();
+                    $("#columnC_data2").empty();
                     show_columnA_data()
                     //alert(this.value);
                     if(this.value == 4 || this.value == 4){
@@ -179,20 +227,93 @@
                             });
 
                             $("#columnA_data").append(trHTML_left);
+                            $("#columnA_data2").append(trHTML_left);
                             $("#columnB_data").append(trHTML_center);
+                            $("#columnB_data2").append(trHTML_center);
                             $("#columnC_data").append(trHTML_right);
+                            $("#columnC_data2").append(trHTML_right);
                         },error: function (jqXHR, textStatus, errorThrown) {
                             alert( textStatus + errorThrown + '! Contact your administrator.');
                         }
                     });
                 }
+                $('input[type="range"]').rangeslider(
+                    {
+                        polyfill: true,
+                        // Default CSS classes
+                        rangeClass: 'rangeslider',
+                        disabledClass: 'rangeslider--disabled',
+                        horizontalClass: 'rangeslider--horizontal',
+                        verticalClass: 'rangeslider--vertical',
+                        fillClass: 'rangeslider__fill',
+                        handleClass: 'rangeslider__handle',
+                    }
+                );
             });
+
+
         </script>
     </body>
 
 </html>
+<style>
+
+    h2{
+        color:#000;
+        text-align:center;
+        font-size:2em;
+    }
+    .warpper{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .tab{
+        cursor: pointer;
+        padding:10px 20px;
+        margin:0px 2px;
+        background: #d3d3d3;
+        display:inline-block;
+        color:#fff;
+        border-radius:3px 3px 0px 0px;
+        box-shadow: 0 0.5rem 0.8rem #00000080;
+    }
+    .panel{
+        display:none;
+        animation: fadein .8s;
+    }
+    @keyframes fadein {
+        from {
+            opacity:0;
+        }
+        to {
+            opacity:1;
+        }
+    }
+    .panel-title{
+        font-size:1.5em;
+        font-weight:bold
+    }
+    .radio{
+        display:none;
+    }
+    #one:checked ~ .panels #one-panel,
+    #two:checked ~ .panels #two-panel,
+    #three:checked ~ .panels #three-panel{
+        display:block
+    }
+    #one:checked ~ .tabs #one-tab,
+    #two:checked ~ .tabs #two-tab,
+    #three:checked ~ .tabs #three-tab{
+        background:#414143;
+        color:#ffffff;
+    }
+</style>
 
 <style>
+    .responsive:hover{
+        opacity: 80%;
+    }
     .header_column{
         width:95%;
     }
@@ -203,7 +324,7 @@
         color : <?php echo $settings->title_font_color; ?> !important;
     }
     .responsive {
-        width: 70%;
+        width: 65%;
         max-width: 400px;
         height: 200px;
         display: block;
@@ -265,8 +386,13 @@
         }
     }
 
-    @media (max-width: 991px) {
+    @media (min-width: 992px) {
+        #mobile_view{
+            display: none;
+        }
+    }
 
+    @media (max-width: 991px) {
         .range_slider {
             width:100% !important;
         }
@@ -291,6 +417,12 @@
             float:right !important;
             text-align: center;
         }
+        #desktop_view{
+            display: none;
+        }
+        #mobile_view{
+            display: block;
+        }
     }
     .main-panel{
         width: calc(100%) !important;
@@ -310,7 +442,8 @@
         width:40%;
         height: 10px;
         display: inline-block !important;
-
+        transition: all .5s ease-in-out;
+        user-select: none;
     }
     .red_slider{
         -webkit-appearance: none;
@@ -318,8 +451,8 @@
         height: 25px;
         background: #d3d3d3;
         outline: none;
-        -webkit-transition: .2s;
-        transition: opacity .2s;
+        -webkit-transition: 5.2s;
+        transition: all .5s ease-in-out;
     }
 
     .red_slider::-webkit-slider-thumb {
@@ -328,6 +461,7 @@
         height: 25px;
         background: #900;
         cursor: pointer;
+        transition: all .5s ease-in-out;
     }
     .blue_slider{
         -webkit-appearance: none;
@@ -335,8 +469,8 @@
         height: 25px;
         background: #d3d3d3;
         outline: none;
-        -webkit-transition: .2s;
-        transition: opacity .2s;
+        -webkit-transition: 5.2s;
+        transition: all .5s ease-in-out;
     }
 
     .blue_slider::-webkit-slider-thumb {
@@ -345,6 +479,7 @@
         height: 25px;
         background: #003366;
         cursor: pointer;
+        transition: all .5s ease-in-out;
     }
     .slider {
         -webkit-appearance: none;
@@ -352,10 +487,7 @@
         height: 25px;
         background: #d3d3d3;
         outline: none;
-        -webkit-transition: .2s;
-        transition: opacity .2s;
     }
-
 
     .slider::-webkit-slider-thumb {
         -webkit-appearance: none;
@@ -364,12 +496,15 @@
         background: #003366;
         cursor: pointer;
         background-image: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 50%, rgba(153,0,0,1) 51%);
+
+
     }
 
     .slider::-moz-range-thumb {
         width: 25px;
         height: 25px;
         cursor: pointer;
+
     }
 
 

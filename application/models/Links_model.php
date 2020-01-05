@@ -23,25 +23,6 @@ class Links_model extends CI_Model
         }
     }
 
-    public function get_details_by_email($key, $field = false)
-    {
-
-        $query = $this->db->get_where($this->table, array('email' => $key), 1);
-
-        if ($field) {
-            $result = $query->row();
-            return $result->$field;
-        } else {
-             return $query->row();
-        }
-    }
-
-    public function update_password($password)
-    {
-        $this->db->set('password', $password);
-        $this->db->where("id", $this->session->user->id);
-        $this->db->update($this->table);
-    }
 
     public function get_all_articles($col)
     {
@@ -53,6 +34,7 @@ class Links_model extends CI_Model
 
     public function get_rating_data($rate,$limit)
     {
+
         $this->db->order_by('priority', 'ASC');
         $this->db->where('rating', $rate);
         //$this->db->where('column_num', $column);

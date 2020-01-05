@@ -4,46 +4,52 @@
     $(document).ready( function () {
 
         $('input[type="checkbox"]').on('change', function () {
-            if ((this).checked == true){
-                var url = document.getElementById("url").value;
-                console.log(url);
-                if(url === ""){
-                   // alert_user("Error!","You must put a valid url first.");
-                    Swal.fire({
-                        title: "Error!",
-                        text: "You must put a valid url first.",
-                        icon: 'error',
-                        showCancelButton: false,
-                        confirmButtonText: 'OK'
-                    })
-                    document.getElementById("include_image").checked = false;
-                }else {
-                    var img_path =   document.getElementById("image-path").innerHTML;
+            // if ((this).checked == true){
+            //     var url = document.getElementById("url").value;
+            //     console.log(url);
+            //     if(url === ""){
+            //        // alert_user("Error!","You must put a valid url first.");
+            //         Swal.fire({
+            //             title: "Error!",
+            //             text: "You must put a valid url first.",
+            //             icon: 'error',
+            //             showCancelButton: false,
+            //             confirmButtonText: 'OK'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+            //         })
+            //         document.getElementById("include_image").checked = false;
+            //     }else {
+            //         var img_path =   document.getElementById("image-path").innerHTML;
+            //
+            //
+            //             var ajaxdata = {
+                                                                                                //                 url_data : url,
+                                                                                                //             };
+                                                                                                //             $.ajax({
+            //                 url: '/admin/column1/get_file_content',
+            //                 type: "post",
+            //                 beforeSend: showProcessing,
+            //                 data: ajaxdata,
+            //                 success: function (data) {
+            //                     showDoneProcessing();
+            //                     $("#article_image").attr('src','data:image/jpeg;base64,'+data+' ');
+            //                     document.getElementById('image_holder').style.display = "block";
+            //                     document.getElementById("image-path").innerHTML = 'data:image/jpeg;base64,'+data+' ';
+            //                     //document.getElementById('image_path_holder').style.display = "block";
+            //                     //console.log(data);
+            //                 }
+            //             });
+            //         //document.getElementById('image_holder').style.display = "block";
+            //     }
+            //     //document.getElementById('img_path').style.display = "block";
+            // }else{
+            //     document.getElementById('img_path').style.display = "none";
 
-
-                        var ajaxdata = {
-                            url_data : url,
-                        };
-                        $.ajax({
-                            url: '/admin/column1/get_file_content',
-                            type: "post",
-                            beforeSend: showProcessing,
-                            data: ajaxdata,
-                            success: function (data) {
-                                showDoneProcessing();
-                                $("#article_image").attr('src','data:image/jpeg;base64,'+data+' ');
-                                document.getElementById('image_holder').style.display = "block";
-                                document.getElementById("image-path").innerHTML = 'data:image/jpeg;base64,'+data+' ';
-                                //document.getElementById('image_path_holder').style.display = "block";
-                                //console.log(data);
-                            }
-                        });
-                    //document.getElementById('image_holder').style.display = "block";
-                }
-                //document.getElementById('img_path').style.display = "block";
+            //     document.getElementById('image_holder').style.display = "none";
+            // }
+            if ((this).checked == true){                                                                                                                                                                                                                                                                                                                                                                                                                                
+                document.getElementById('img_path').style.display = "block";
             }else{
                 document.getElementById('img_path').style.display = "none";
-                document.getElementById('image_holder').style.display = "none";
             }
         });
 
@@ -65,6 +71,21 @@
             //alert("Girls Like You");
             if (document.getElementById('include_image').checked) {
                 is_img_show = 1;
+                var img = document.getElementById("img_path").value;
+                if(img!==""){
+                    $.ajax({
+                        url:'/admin/column1/upload_pic',
+                        type:"post",
+                        data:new FormData(this),
+                        processData:false,
+                        contentType:false,
+                        cache:false,
+                        async:false,
+                        success: function(data){
+                            image_path = data;
+                        }
+                    });
+                }
             }else{
                 is_img_show = 0;
             }
@@ -137,19 +158,20 @@
             $('[id="image-path"]').html($(this).data('imgpath'));
             $("#article_image").attr('src',$(this).data('imgpath'));
 
+            console.log($(this).data('imgpath'));
             if($(this).data('imgdisplay')===1){
                 document.getElementById("include_image").checked = true;
-                //document.getElementById('img_path').style.display = "block";
-                //document.getElementById('image_path_holder').style.display = "block";
+                document.getElementById('img_path').style.display = "block";
+                document.getElementById('image_path_holder').style.display = "block";
                 document.getElementById('image_holder').style.display = "block";
             }else{
                 if($(this).data('imgpath') !== ""){
-                   // document.getElementById('img_path').style.display = "block";
-                    //document.getElementById('image_path_holder').style.display = "block";
+                    document.getElementById('img_path').style.display = "block";
+                    document.getElementById('image_path_holder').style.display = "block";
                     document.getElementById('image_holder').style.display = "block";
                 }else{
                     document.getElementById("include_image").checked = false;
-                   // document.getElementById('img_path').style.display = "none";
+                   document.getElementById('img_path').style.display = "none";
                     document.getElementById('image_path_holder').style.display = "none";
                 }
 
@@ -211,6 +233,15 @@
             $('[id="priority"]').val("0");
             $('[id="rating"]').val("1");
             $('[id="link_id"]').val("");
+            $('[id="image-path"]').val("");
+            $('[id="img_path"]').val("");
+            $('[id="image_holder"]').val("");
+            $('[id="image_path_holder"]').val("");
+
+            document.getElementById('image_holder').style.display = "none";
+            document.getElementById('image_path_holder').style.display = "none";
+            document.getElementById('img_path').style.display = "none";
+
             document.getElementById("exampleModalLabel").innerHTML = "Add Link";
         });
 

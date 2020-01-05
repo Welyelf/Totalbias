@@ -116,12 +116,12 @@
                     }
                 }
                 ?>
-            <div class="row pull-right modal-footer">
-               <div class="col-lg-12 ">
-                   <button type="submit" class="btn btn-primary" value="Save"><span class="nc-icon nc-send"></span> Save</button>
-                    <a id="cancel" href="/admin/settings" class="btn btn-danger"><span class="nc-icon nc-simple-remove"></span> Cancel</a>
-               </div>
-            </div>
+             <div class="row pull-right modal-footer">
+                 <div class="col-lg-12 ">
+                     <button type="submit" class="btn btn-primary" value="Save"><span class="nc-icon nc-send"></span> Save</button>
+                     <a id="cancel" href="/admin/settings" class="btn btn-danger"><span class="nc-icon nc-simple-remove"></span> Cancel</a>
+                 </div>
+             </div>
          </form>
     </div>
 </div>

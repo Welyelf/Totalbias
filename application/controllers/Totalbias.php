@@ -16,6 +16,7 @@ class Totalbias extends CI_Controller {
         $this->load->model('Links_model', 'links');
         $this->load->model('Settings_model', 'settings_model');
         $this->load->model('Hits_model', 'hits_model');
+        $this->load->model('Scoring_model', 'scoring_model');
     }
 
     public function index()
@@ -28,12 +29,11 @@ class Totalbias extends CI_Controller {
         //$setting= (object)$this->settings;
         //echo $setting->column1_limit;
 		//strtotime(date('d-M-Y'))
-		
+
 		$today = date("d-M-Y");
 		if($this->session->visited !== "1"){
 			if(empty($this->hits_model->get_today_hits())) {
 				$this->hits_model->add(1);
-				
 			}else{
 				$today_hits = $this->hits_model->get_today_hits();
 				//echo $today_hits->count;
@@ -54,12 +54,29 @@ class Totalbias extends CI_Controller {
         foreach ($settings as $setting) {
             $this->settings[$setting->name] = $setting->value;
         }
+
+
         $setting= (object)$this->settings;
 
+        $news_data = $this->scoring_model->get_details("news");
+        $videos_data = $this->scoring_model->get_details("videos");
+        $podcast_data= $this->scoring_model->get_details("podcasts");
+
+        if($news_data->sort_first == 1){
+
+        }else if($news_data->sort_first == 2){
+
+        }else if($news_data->sort_first == 3){
+
+        }else{
+
+        }
+
         $rating = $_POST['rating'];
-        $links= $this->links->get_rating_data($rating,NULL);
+        $links = $this->links->get_rating_data($rating,NULL);
 
         $data_links = array();
+
         foreach ($links as $data_link) {
             $arr = array();
 
@@ -106,7 +123,7 @@ class Totalbias extends CI_Controller {
 
 
             if($data_link->img_display == 1){
-                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><img src='$data_link->img_path' alt='$data_link->title' class='responsive'/><br><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
+                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><a href=' $data_link->url '  ><img src='$data_link->img_path' alt='$data_link->title' class='responsive'/></a><br><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
                 <div  id='publisher2'><small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small></div> </div></div></div>";
             }
             else{
