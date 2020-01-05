@@ -270,13 +270,15 @@
     }
     .tab{
         cursor: pointer;
-        padding:10px 20px;
+        padding:10px 10px;
         margin:0px 2px;
         background: #d3d3d3;
         display:inline-block;
         color:#fff;
         border-radius:3px 3px 0px 0px;
         box-shadow: 0 0.5rem 0.8rem #00000080;
+        width:100px;
+        text-align: center;
     }
     .panel{
         display:none;
@@ -324,7 +326,7 @@
         color : <?php echo $settings->title_font_color; ?> !important;
     }
     .responsive {
-        width: 65%;
+        width: 250px;
         max-width: 400px;
         height: 200px;
         display: block;
