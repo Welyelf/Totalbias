@@ -68,6 +68,7 @@ class Totalbias extends CI_Controller {
         }else{
             $sort_date = "ASC";
         }
+        $sort_date = "DESC";
 
         $rating = $_POST['rating'];
         $links = $this->links->get_rating_data($rating,NULL,$sort_date,$news_data->sort_first);
@@ -118,11 +119,11 @@ class Totalbias extends CI_Controller {
 
 
             if($data_link->img_display == 1){
-                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><a href=' $data_link->url '  ><img src='$data_link->img_path' alt='$data_link->title' class='responsive'/></a><br><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
+                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><a href=' $data_link->url ' target='_blank' ><img src='$data_link->img_path' alt='$data_link->title' class='responsive'/></a><br><div class='panel-body'> <a target='_blank' class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
                 <div  id='publisher2'><small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small></div> </div></div></div>";
             }
             else{
-                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
+                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url ' target='_blank' ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
                 <div  id='publisher2'><small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small></div> </div></div></div>";
 
             }

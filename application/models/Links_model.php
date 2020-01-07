@@ -31,19 +31,20 @@ class Links_model extends CI_Model
         return $query->result();
     }
 
-    public function get_rating_data($rate,$limit,$sort_date,$sort_first)
+    public function get_rating_data($rate,$limit,$sort_date="DESC",$sort_first=NULL)
     {
+        $this->db->order_by('id',$sort_date);
         $this->db->where('rating', $rate);
         if($sort_first == 1){
             $this->db->order_by('rating', 'ASC');
         }else if($sort_first == 2){
-            $this->db->order_by('priority', 'ASC');
+           $this->db->order_by('priority', 'ASC');
         }else if($sort_first == 3){
             $this->db->order_by('column_num', 'ASC');
         }else{
-            $this->db->order_by('priority', 'ASC');
+            //$this->db->order_by('priority', 'ASC');
         }
-        $this->db->order_by('id',$sort_date);
+
         //$this->db->where('id', $sort_date);
         $this->db->limit($limit);
         $query = $this->db->get($this->table);

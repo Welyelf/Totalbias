@@ -326,11 +326,12 @@
         color : <?php echo $settings->title_font_color; ?> !important;
     }
     .responsive {
-        width: 250px;
-        max-width: 400px;
-        height: 200px;
+        max-width: 230px;
+        max-height: 95px;
         display: block;
         margin-left: 15px;
+        width: auto;
+        height: auto;
     }
     body{
         clear:both;
@@ -444,7 +445,8 @@
         width:40%;
         height: 10px;
         display: inline-block !important;
-        transition: all .5s ease-in-out;
+        -webkit-transition: 2s;
+        transition: width 2s;
         user-select: none;
     }
     .red_slider{
