@@ -59,13 +59,13 @@ class Column1 extends CI_Controller {
             if (!$this->upload->do_upload('file')) {
                 //$this->data['file'] = $this->upload->display_errors();
                 $this->data['error'] = $this->upload->display_errors();
+                echo $this->upload->display_errors();
             } else {
                 $upload_data = $this->upload->data();
                 $image_path = '/assets/img/' . $upload_data['file_name'];
                 echo $image_path;
             }
         }
-
     }
 
     public function get_file_content(){

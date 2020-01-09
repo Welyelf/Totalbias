@@ -83,6 +83,9 @@
                         async:false,
                         success: function(data){
                             image_path = data;
+                            console.log(data);
+                            console.log("asdfasdf");
+
                         }
                     });
                 }
