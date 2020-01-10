@@ -2,6 +2,15 @@
 <html lang="en">
 
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154420543-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-154420543-1');
+        </script>
         <meta charset="utf-8" />
         <link rel="icon" type="image/png" href="../assets/img/tb.png">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -163,7 +172,7 @@
                     $("#columnB_data2").empty();
                     $("#columnC_data").empty();
                     $("#columnC_data2").empty();
-                    show_columnA_data()
+                    show_columnA_data();
                     //alert(this.value);
                     if(this.value == 4 || this.value == 4){
                         document.getElementById('customRange2').className = 'red_slider';
@@ -190,15 +199,15 @@
                     var ajaxdata = {
                         rating : rate,
                     };
-
+                    console.log(rate);
                     $.ajax({
                         url:'/totalbias/get_cloumnA_data',
                         type:"post",
                         data:ajaxdata,
                         success: function(data){
                             //alert(data);
-                            var links_data = data;
-                            var obj = JSON.parse(links_data);
+                            var links_datas = data;
+                            var obj = JSON.parse(links_datas);
 
                             var trHTML_left = '';
                             var trHTML_center = '';
@@ -326,12 +335,14 @@
         color : <?php echo $settings->title_font_color; ?> !important;
     }
     .responsive {
-        max-width: 230px;
-        max-height: 95px;
+        max-width: 280px;
+        max-height: 140px;
         display: block;
         margin-left: 15px;
         width: auto;
         height: auto;
+        min-width: 240px;
+        min-height: 120px;
     }
     body{
         clear:both;

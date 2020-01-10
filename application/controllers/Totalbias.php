@@ -125,7 +125,6 @@ class Totalbias extends CI_Controller {
             else{
                 $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url ' target='_blank' ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
                 <div  id='publisher2'><small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small></div> </div></div></div>";
-
             }
 
             //$arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><img src='/assets/img/11.jpg' alt='Nature' class='responsive'/><br><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>

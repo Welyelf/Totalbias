@@ -230,7 +230,8 @@
                                         <table id="column1" class="display dataTable dtr-inline collapsed" role="grid">
                                             <thead>
                                             <tr>
-                                                <th width="30px;">Time</th>
+                                                <th width="30px;">ID</th>
+                                                <th width="30px;">Date and Time</th>
                                                 <th width="30px;">Title</th>
                                                 <th width="30px;">Column</th>
                                                 <th width="5px;">Prio</th>
@@ -241,6 +242,7 @@
                                             <tbody>
                                             <?php foreach ($news as $c1) { ?>
                                                 <tr>
+                                                    <td><?php echo $c1->id; ?></td>
                                                     <td><?php echo $c1->datetime; ?></td>
                                                     <td>
                                                         <!--<a target="_blank" href="<?php echo $c1->url; ?>">-->
@@ -322,7 +324,8 @@
                                         <table id="column2" class="display dataTable dtr-inline collapsed" role="grid">
                                             <thead>
                                             <tr>
-                                                <th width="30px;">Time</th>
+                                                <th width="30px;">ID</th>
+                                                <th width="30px;">Date and Time</th>
                                                 <th width="30px;">Title</th>
                                                 <th width="30px;">Column</th>
                                                 <th width="5px;">Prio</th>
@@ -333,6 +336,7 @@
                                             <tbody>
                                             <?php foreach ($videos as $c1) { ?>
                                                 <tr>
+                                                    <td><?php echo $c1->id; ?></td>
                                                     <td><?php echo $c1->datetime; ?></td>
                                                     <td>
                                                         <!--<a target="_blank" href="<?php echo $c1->url; ?>">-->
@@ -413,7 +417,8 @@
                                         <table id="column3" class="display dataTable dtr-inline collapsed" role="grid">
                                             <thead>
                                             <tr>
-                                                <th width="30px;">Time</th>
+                                                <th width="30px;">ID</th>
+                                                <th width="30px;">Date and Time</th>
                                                 <th width="30px;">Title</th>
                                                 <th width="30px;">Column</th>
                                                 <th width="5px;">Prio</th>
@@ -424,6 +429,7 @@
                                             <tbody>
                                             <?php foreach ($podcasts as $c1) { ?>
                                                 <tr>
+                                                    <td><?php echo $c1->id; ?></td>
                                                     <td><?php echo $c1->datetime; ?></td>
                                                     <td>
                                                         <!--<a target="_blank" href="<?php echo $c1->url; ?>">-->
