@@ -144,6 +144,13 @@
             "pageLength": 1000,
             "order": [[ 0, "desc" ]]
         });
+
+        var table4 = $('#column4').DataTable({
+            paginate: true,
+            "lengthChange": false,
+            "pageLength": 1000,
+            "order": [[ 0, "desc" ]]
+        });
         // $('#column1 tbody').on('click', 'tr', function () {
         //     var data = table.row( this ).data();
         //     //alert( 'You clicked on '+data[0]+'\'s row' );
@@ -201,6 +208,30 @@
 
 
         });
+        $("#remove_link").on( "click", function( event ) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete all articles!'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: '/admin/column1/delete_archived',
+                        type: 'POST',
+                        data: {id : "1",},
+                        success: function (data) {
+                            alert_user("Deleted!","Archived article has been deleted.");
+                        }
+                    });
+                }
+            })
+        });
+
+
         $(".delete_c1").on( "click", function( event ) {
             var ID=this.id;
             //alert_user("Added!","New link has been successfully added.");

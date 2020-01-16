@@ -201,6 +201,7 @@
             <button class="tablinks" onclick="openCity(event, 'NEWS')">News</button>
             <button class="tablinks" onclick="openCity(event, 'VIDEOS')">Videos</button>
             <button class="tablinks" onclick="openCity(event, 'PODCASTS')">Podcasts</button>
+            <button class="tablinks" onclick="openCity(event, 'Archived')">To Archive Articles</button>
         </div>
 
         <div id="NEWS" class="tabcontent active">
@@ -215,7 +216,7 @@
                                         <div class="text-center">
                                             <div class="row">
                                                 <div class="col-sm-9">
-                                                    <h3 class="pull-left">Column A</h3>
+                                                    <h3 class="pull-left"></h3>
                                                 </div>
                                                 <div class="col-sm-3">
                                                     <h4 class="pull-right">
@@ -233,7 +234,7 @@
                                                 <th width="30px;">ID</th>
                                                 <th width="30px;">Date and Time</th>
                                                 <th width="30px;">Title</th>
-                                                <th width="30px;">Column</th>
+                                                <th width="30px;">User</th>
                                                 <th width="5px;">Prio</th>
                                                 <th width="5px;">Rate</th>
                                                 <th width="10px;">Action</th>
@@ -253,11 +254,7 @@
                                                         <small><?php echo $c1->publisher; ?></small>
                                                     </td>
                                                     <td>
-                                                        <?php
-                                                        if($c1->column_num == 1){
-                                                            echo "News";
-                                                        }
-                                                        ?>
+                                                        <?php echo $c1->user_added; ?>
                                                     </td>
                                                     <td><?php echo $c1->priority; ?></td>
                                                     <td><?php echo $c1->rating; ?></td>
@@ -327,7 +324,7 @@
                                                 <th width="30px;">ID</th>
                                                 <th width="30px;">Date and Time</th>
                                                 <th width="30px;">Title</th>
-                                                <th width="30px;">Column</th>
+                                                <th width="30px;">User</th>
                                                 <th width="5px;">Prio</th>
                                                 <th width="5px;">Rate</th>
                                                 <th width="10px;">Action</th>
@@ -347,11 +344,7 @@
                                                         <small><?php echo $c1->publisher; ?></small>
                                                     </td>
                                                     <td>
-                                                        <?php
-                                                        if($c1->column_num == 1){
-                                                            echo "Videos";
-                                                        }
-                                                        ?>
+                                                        <?php echo $c1->user_added; ?>
                                                     </td>
                                                     <td><?php echo $c1->priority; ?></td>
                                                     <td><?php echo $c1->rating; ?></td>
@@ -420,7 +413,7 @@
                                                 <th width="30px;">ID</th>
                                                 <th width="30px;">Date and Time</th>
                                                 <th width="30px;">Title</th>
-                                                <th width="30px;">Column</th>
+                                                <th width="30px;">User</th>
                                                 <th width="5px;">Prio</th>
                                                 <th width="5px;">Rate</th>
                                                 <th width="10px;">Action</th>
@@ -440,11 +433,106 @@
                                                         <small><?php echo $c1->publisher; ?></small>
                                                     </td>
                                                     <td>
+                                                        <?php echo $c1->user_added; ?>
+                                                    </td>
+                                                    <td><?php echo $c1->priority; ?></td>
+                                                    <td><?php echo $c1->rating; ?></td>
+                                                    <td>
+                                                        <button type="button" class="edit_button" id="<?php echo $c1->id; ?>" data-title="<?php echo $c1->title; ?>" data-pub="<?php echo $c1->publisher; ?>"
+                                                                data-url="<?php echo $c1->url; ?>" data-column_num="<?php echo $c1->column_num; ?>" data-priority="<?php echo $c1->priority; ?>" data-rating="<?php echo $c1->rating; ?>"
+                                                                data-titlecss="<?php  echo htmlentities($c1->title_css); ?>" data-pubcss="<?php  echo htmlentities($c1->publisher_css); ?>" data-authorcss="<?php  echo htmlentities($c1->author_css); ?>"
+                                                                data-author="<?php echo $c1->author; ?>" data-imgdisplay="<?php echo $c1->img_display; ?>" data-imgpath="<?php echo $c1->img_path; ?>">
+                                                            <i class="fa fa-edit" style="font-size:16px"></i>
+                                                        </button>
+                                                        <button type="button" id="<?php echo $c1->id; ?>" class="delete_c1">
+                                                            <i class="fa fa-trash-o" style="font-size:16px"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                            <?php } ?>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                    <div class="panel-footer">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer ">
+                        <hr>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="Archived" class="tabcontent">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card card-stats">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <div class="panel">
+                                    <div class="panel-heading">
+                                        <div class="text-center">
+                                            <div class="row">
+                                                <div class="col-sm-9">
+                                                    <h3 class="pull-left">Articles</h3>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <button type="button" id="remove_link" class="btn btn-primary pull-right"> Remove All Articles </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-body">
+                                        <table id="column4" class="display dataTable dtr-inline collapsed" role="grid">
+                                            <thead>
+                                            <tr>
+                                                <th width="30px;">ID</th>
+                                                <th width="30px;">Date and Time</th>
+                                                <th width="30px;">Title</th>
+                                                <th width="30px;">Column</th>
+                                                <th width="30px;">User</th>
+                                                <th width="5px;">Prio</th>
+                                                <th width="5px;">Rate</th>
+                                                <th width="10px;">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php foreach ($archives as $c1) { ?>
+                                                <tr>
+                                                    <td><?php echo $c1->id; ?></td>
+                                                    <td><?php echo $c1->datetime; ?></td>
+                                                    <td>
+                                                        <!--<a target="_blank" href="<?php echo $c1->url; ?>">-->
+                                                        <strong>
+                                                            <?php echo mb_strimwidth($c1->title,0,50,'...'); ?>
+                                                        </strong><!--</a>-->
+                                                        <br>
+                                                        <small><?php echo $c1->publisher; ?></small>
+                                                    </td>
+                                                    <td>
                                                         <?php
-                                                        if($c1->column_num == 1){
-                                                            echo "Podcasts";
-                                                        }
-                                                        ?>
+                                                            if($c1->column_num == "1"){
+                                                                echo "News";
+                                                            } else if($c1->column_num == "2"){
+                                                                echo "Videos";
+                                                            }
+                                                            else if($c1->column_num == "3"){
+                                                                echo "Podcasts";
+                                                            }
+                                                             ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $c1->user_added; ?>
                                                     </td>
                                                     <td><?php echo $c1->priority; ?></td>
                                                     <td><?php echo $c1->rating; ?></td>
@@ -543,6 +631,7 @@
         document.getElementById(cityName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
 </script>
 
 <style>

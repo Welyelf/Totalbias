@@ -13,13 +13,13 @@
                                             <div class="col-lg-12 col-md-12 col-sm-12">
 
                                                 <div class="tab">
-                                                    <button class="tablinks" onclick="openCity(event, 'NEWS')">News</button>
+                                                    <!--<button class="tablinks" onclick="openCity(event, 'NEWS')">News</button>
                                                     <button class="tablinks" onclick="openCity(event, 'VIDEOS')">Videos</button>
-                                                    <button class="tablinks" onclick="openCity(event, 'PODCASTS')">Podcasts</button>
+                                                    <button class="tablinks" onclick="openCity(event, 'PODCASTS')">Podcasts</button>-->
                                                 </div>
 
                                                 <div id="NEWS" class="tabcontent active">
-                                                    <h3>NEWS | Scoring Algorithm</h3>
+                                                    <h3>Scoring Algorithm</h3>
                                                     <div class="col-lg-12 col-md-12 col-sm-12">
                                                         <div class="card card-stats">
                                                             <div class="card-body ">

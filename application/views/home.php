@@ -188,12 +188,20 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="credits ml-auto">
+
                           <span class="copyright">
-                            ©
+                            | ©
                             <script>
                               document.write(new Date().getFullYear())
                             </script>. TotalBias.com
                           </span>
+                            <span class="copyright">
+                                |
+                                <i class="fa fa-twitter" aria-hidden="true" style="color:#1da1f3;font-size: 16px;"></i> <a target="_blank" href="https://twitter.com/total_bias">@total_bias</a>
+                            </span>
+                            <span class="copyright">
+                                 <a target="_blank" href="mailto:email.inquiries@totalbias.com" >email.inquiries@totalbias.com</a>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -248,12 +256,15 @@
 
                     var rating_value =  $('#customRange2').val();
                     fect_link_data(rating_value);
+
+
                     if( (rating_value - 1) !== 0){
-                        fect_link_data(Number(rating_value)-1);
+                        setTimeout(function() { fect_link_data(Number(rating_value)-1); }, 900);
                     }
 
                     if( Number(rating_value)+1 < 6){
-                        fect_link_data(Number(rating_value)+1);
+                        setTimeout(function() { fect_link_data(Number(rating_value)+1); }, 900);
+                        //fect_link_data(Number(rating_value)+1);
                     }
                 }
 
@@ -296,7 +307,7 @@
                                 }
                                 //alert(item.column_num);
                             });
-
+                            //console.log(trHTML_center);
                             $("#columnA_data").append(trHTML_left);
                             $("#columnA_data2").append(trHTML_left);
                             $("#columnB_data").append(trHTML_center);

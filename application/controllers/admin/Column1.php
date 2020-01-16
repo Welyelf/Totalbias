@@ -8,14 +8,39 @@ class Column1 extends CI_Controller {
         parent::__construct();
         $this->auth->check(array("", ""));
         $this->load->model('Links_model', 'links');
+        $this->load->model('Scoring_model', 'scoring_model');
 
     }
     public function index()
     {
         //$this->load->view('auth/login.php');
+        $articles = $this->links->get_all_article();
+        $today = date("d-m-Y h:i A");
+
+        $news_data = $this->scoring_model->get_details("news");
+
+        foreach ($articles as $article){
+
+            $start_dates = date("Y-m-d", strtotime($article->datetime));
+            $end_dates = date("Y-m-d", strtotime($today));
+
+            $start_date = strtotime($start_dates);
+            $end_date = strtotime($end_dates);
+            $diff = ($end_date - $start_date) /60 /60 /24;
+
+            if($diff > $news_data->exc_days_older){
+                $input = $this->input->post();
+                $id = $article->id;
+                $input['is_archive'] = "1";
+                $this->links->update($input, $id);
+            }
+        }
+
+
         $this->data['news'] = $this->links->get_all_articles(1);
         $this->data['videos'] = $this->links->get_all_articles(2);
         $this->data['podcasts'] = $this->links->get_all_articles(3);
+        $this->data['archives'] = $this->links->get_all_archived();
         $this->load->view('layout/backend/master', $this->data);
     }
 
@@ -23,18 +48,27 @@ class Column1 extends CI_Controller {
     {
         $input = $this->input->post();
         if ($input) {
-            $input['datetime'] = date("m-d-Y h:i A");
+            $input['datetime'] = date("d-m-Y h:i A");
             if($input['id']!= ""){
                 $id = $input['id'];
                 unset($input['id']);
+                $input['user_added'] = $this->session->user->fullname;
                 $this->links->update($input, $id);
                 echo "update";
-            }else{
+            } else{
                 unset($input['id']);
+                $input['user_added'] = $this->session->user->fullname;
                 $this->links->add($input);
                 echo "add";
             }
+        }
+    }
 
+    public function delete_archived()
+    {
+        $id = $_POST['id'];
+        if ($this->links->delete_archive($id)) {
+            echo  "nice";
         }
     }
     public function delete()

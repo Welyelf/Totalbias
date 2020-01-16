@@ -31,6 +31,21 @@ class Links_model extends CI_Model
         return $query->result();
     }
 
+    public function get_all_article()
+    {
+        $this->db->order_by('id','DESC');
+        $query = $this->db->get($this->table);
+        return $query->result();
+    }
+
+    public function get_all_archived()
+    {
+        $this->db->where('is_archive', "1");
+        $this->db->order_by('id','DESC');
+        $query = $this->db->get($this->table);
+        return $query->result();
+    }
+
     public function get_rating_data($rate,$limit,$sort_date="DESC",$sort_first=NULL)
     {
         $this->db->order_by('id',"DESC");
@@ -79,6 +94,17 @@ class Links_model extends CI_Model
     public function delete($id)
     {
         $this->db->where('id', $id);
+
+        if ($this->db->delete($this->table)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function delete_archive()
+    {
+        $this->db->where('is_archive', "1");
 
         if ($this->db->delete($this->table)) {
             return true;

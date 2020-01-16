@@ -60,12 +60,11 @@ class Totalbias extends CI_Controller {
             $this->settings[$setting->name] = $setting->value;
         }
 
-
-        $setting= (object)$this->settings;
+        //$setting= (object)$this->settings;
 
         $news_data = $this->scoring_model->get_details("news");
-        $videos_data = $this->scoring_model->get_details("videos");
-        $podcast_data= $this->scoring_model->get_details("podcasts");
+        //$videos_data = $this->scoring_model->get_details("videos");
+        //$podcast_data= $this->scoring_model->get_details("podcasts");
 
 
         if($news_data->sort_second == 1){
@@ -115,9 +114,10 @@ class Totalbias extends CI_Controller {
             }
             if(isset($title_css['font_color'])){
                 $title_css_assign = $title_css_assign ."color:".$title_css['font_color']."!important;";
+                $title_css_assign_hover = "style='a:hover,a:focus{color:".$title_css['font_color']."!important}'";
             }
             if(isset($title_css['hover_color'])){
-              //  $title_css_assign_hover = "style='a:hover,a:focus{color:".$title_css['hover_color']."!important}'";
+                //$title_css_assign_hover = "style='a:hover,a:focus{color:".$title_css['font_color']."!important}'";
             }
 
             if(!empty($data_link->author)){
