@@ -17,10 +17,13 @@ class Totalbias extends CI_Controller {
         $this->load->model('Settings_model', 'settings_model');
         $this->load->model('Hits_model', 'hits_model');
         $this->load->model('Scoring_model', 'scoring_model');
+        $this->load->model('Ad_model', 'ad_model');
     }
 
     public function index()
     {
+
+
         $settings = $this->settings_model->get_all();
         foreach ($settings as $setting) {
             $this->settings[$setting->name] = $setting->value;
@@ -45,6 +48,8 @@ class Totalbias extends CI_Controller {
 			//$today_hits = $this->hits_model->get_today_hits();
 			//echo $today_hits->count;
 		}
+        $this->data['ads'] = $this->ad_model->get_all_active();
+
         $this->load->view('home', $this->data);
     }
 
@@ -74,8 +79,29 @@ class Totalbias extends CI_Controller {
         $links = $this->links->get_rating_data($rating,NULL,$sort_date,$news_data->sort_first);
         $data_links = array();
 
+        $ads = $this->ad_model->get_all_active_ratings($rating);
+        $numbers = array();
+        foreach ($ads as $ad){
+            array_push($numbers,$ad->id);
+            $value = $ad->ad_value;
+            $col = $ad->ad_column;
+        }
 
+        //echo count($numbers);
+
+        $ctr = 0;
         foreach ($links as $data_link) {
+
+            if($ctr%5 == 0){
+                $gen_num = rand(0, count($numbers));
+                if(isset($col) && $col == $data_link->column_num){
+                    $get_ads = $this->ad_model->get_details($numbers[$gen_num]);
+                    $arr['title'] = "<div style='margin-bottom: 10px;text-align: center;'>" .$get_ads->ad_value ."</div>" ;
+                    $arr['column_num'] = $col;
+                    $data_links[] =  $arr;
+                }
+            }
+
             $arr = array();
 
             $title_css = (array) json_decode($data_link->title_css,TRUE);
@@ -132,6 +158,8 @@ class Totalbias extends CI_Controller {
             //$arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><div class='panel-body'><a target='_blank' href=' $data_link->url'><h4> $data_link->title </h4></a><small id='publisher'><i>$data_link->publisher</i></small></div></div></div>";
             $arr['column_num'] = $data_link->column_num;
             $data_links[] =  $arr;
+
+            $ctr++;
         }
         echo json_encode($data_links);
     }

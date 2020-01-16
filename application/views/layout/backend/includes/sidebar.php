@@ -36,6 +36,12 @@
         <?php
             if($this->auth->check_if_superadmin()){
                 ?>
+                <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/ad"){echo "active";} ?>">
+                    <a href="<?php echo base_url('/administrator/ad'); ?>">
+                        <i class="nc-icon nc-layout-11"></i>
+                        <p>Advertisement</p>
+                    </a>
+                </li>
                     <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/scoring"){echo "active";} ?>">
                         <a href="<?php echo base_url('/administrator/scoring'); ?>">
                             <i class="nc-icon nc-paper"></i>

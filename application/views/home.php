@@ -31,9 +31,23 @@
             <div class="container-fluid">
 
             <div class="main-panel">
-
+<?php  ?>
             <div class="content" style="margin-top: 13px !important;">
                 <div class="row">
+                    <div class="col-md-12">
+                        <?php
+                        foreach ($ads as $ad) {
+                            if ($ad->ad_rating == "0" && $ad->ad_position == "Top") {
+                                ?>
+                                    <div class="col-lg-12" style="text-align: center;margin-bottom: 20px;">
+                                        <?php echo $ad->ad_value; ?>
+                                    </div>
+                                <?php
+                            }
+                        }
+
+                        ?>
+                    </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 range_slider" style="text-align: center;">
                         <img src="/assets/img/tb1.png" class="totalbias_logo">
                             <br> <br>
@@ -110,7 +124,6 @@
                                 <div class="card-body " id="columnC_data">
 
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -118,8 +131,57 @@
                         <hr >
                     </div>
                 </div>
-                <div id="amzn-assoc-ad-8d82f34b-639e-41fd-995d-a27047080e80"></div>
-                <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=8d82f34b-639e-41fd-995d-a27047080e80"></script>
+                <div class="col-md-12">
+                    <?php
+                        foreach ($ads as $ad) {
+                            if ($ad->ad_rating == "0") {
+                                if ($ad->ad_position == "Left") {
+                                    ?>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+                                        <?php echo $ad->ad_value; ?>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+
+                                    </div>
+                                    <?php
+
+                                } else if ($ad->ad_position == "Center") {
+                                    ?>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 col-sm-12" style="align;center;">
+                                        <?php echo $ad->ad_value; ?>
+                                    </div>
+                                    <?php
+                                } else if ($ad->ad_position == "Right") {
+                                    ?>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 col-sm-12">
+
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 col-sm-12" style="align;center;">
+                                        <?php echo $ad->ad_value; ?>
+                                    </div>
+                                    <?php
+                                } else if ($ad->ad_position == "Full") {
+                                    ?>
+                                    <div class="col-md-12">
+                                        <?php echo $ad->ad_value; ?>
+                                    </div>
+                                    <?php
+                                }
+
+                            }
+                        }
+
+                    ?>
+                </div>
 
 
                 <footer class="footer footer-black  footer-white ">
