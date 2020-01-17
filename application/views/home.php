@@ -259,11 +259,11 @@
 
 
                     if( (rating_value - 1) !== 0){
-                        setTimeout(function() { fect_link_data(Number(rating_value)-1); }, 900);
+                        //setTimeout(function() { fect_link_data(Number(rating_value)-1); }, 900);
                     }
 
                     if( Number(rating_value)+1 < 6){
-                        setTimeout(function() { fect_link_data(Number(rating_value)+1); }, 900);
+                        //setTimeout(function() { fect_link_data(Number(rating_value)+1); }, 900);
                         //fect_link_data(Number(rating_value)+1);
                     }
                 }

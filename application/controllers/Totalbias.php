@@ -67,12 +67,15 @@ class Totalbias extends CI_Controller {
         //$podcast_data= $this->scoring_model->get_details("podcasts");
 
 
-        if($news_data->sort_second == 1){
-            $sort_date = "DESC";
-        }else{
-            $sort_date = "ASC";
+        if($news_data->sort_first == 1){
+            $sort_date = "priority";
+        }else if($news_data->sort_first == 2){
+            $sort_date = "rating";
+        }else if($news_data->sort_first == 3){
+            $sort_date = "column_num";
+        }else if($news_data->sort_first == 4){
+            $sort_date = "id";
         }
-        $sort_date = "DESC";
 
         $rating = $_POST['rating'];
         $links = $this->links->get_rating_data($rating,NULL,$sort_date,$news_data->sort_first);

@@ -244,7 +244,7 @@
                                             <?php foreach ($news as $c1) { ?>
                                                 <tr>
                                                     <td><?php echo $c1->id; ?></td>
-                                                    <td><?php echo $c1->datetime; ?></td>
+                                                    <td><?php echo date("m-d-Y h:i A",strtotime($c1->datetime));?></td>
                                                     <td>
                                                         <!--<a target="_blank" href="<?php echo $c1->url; ?>">-->
                                                         <strong>
@@ -334,7 +334,7 @@
                                             <?php foreach ($videos as $c1) { ?>
                                                 <tr>
                                                     <td><?php echo $c1->id; ?></td>
-                                                    <td><?php echo $c1->datetime; ?></td>
+                                                    <td><?php echo date("m-d-Y h:i A",strtotime($c1->datetime));?></td>
                                                     <td>
                                                         <!--<a target="_blank" href="<?php echo $c1->url; ?>">-->
                                                         <strong>
@@ -423,7 +423,7 @@
                                             <?php foreach ($podcasts as $c1) { ?>
                                                 <tr>
                                                     <td><?php echo $c1->id; ?></td>
-                                                    <td><?php echo $c1->datetime; ?></td>
+                                                    <td><?php echo date("m-d-Y h:i A",strtotime($c1->datetime));?></td>
                                                     <td>
                                                         <!--<a target="_blank" href="<?php echo $c1->url; ?>">-->
                                                         <strong>
@@ -510,7 +510,7 @@
                                             <?php foreach ($archives as $c1) { ?>
                                                 <tr>
                                                     <td><?php echo $c1->id; ?></td>
-                                                    <td><?php echo $c1->datetime; ?></td>
+                                                    <td><?php echo date("m-d-Y h:i A",strtotime($c1->datetime));?></td>
                                                     <td>
                                                         <!--<a target="_blank" href="<?php echo $c1->url; ?>">-->
                                                         <strong>

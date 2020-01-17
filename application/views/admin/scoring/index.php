@@ -38,6 +38,7 @@
                                                                                                             <option <?php if($news_data->sort_first == 1){ echo "selected"; } ?> value="1">Priority</option>
                                                                                                             <option <?php if($news_data->sort_first == 2){ echo "selected"; } ?> value="2">Rating</option>
                                                                                                             <option <?php if($news_data->sort_first == 3){ echo "selected"; } ?> value="3">Column</option>
+                                                                                                            <option <?php if($news_data->sort_first == 4){ echo "selected"; } ?> value="4">Date Time</option>
                                                                                                         </select>
                                                                                                 </div>
                                                                                                 <div class="form-group row">

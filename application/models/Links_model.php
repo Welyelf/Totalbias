@@ -46,10 +46,27 @@ class Links_model extends CI_Model
         return $query->result();
     }
 
-    public function get_rating_data($rate,$limit,$sort_date="DESC",$sort_first=NULL)
+    public function get_rating_data($rate,$limit,$sort_date,$sort_first=NULL)
     {
-        $this->db->order_by('id',"DESC");
+
+        $this->db->order_by($sort_date,"DESC");
         $this->db->where('rating', $rate);
+
+        $rates=array($rate);
+
+        $rating_value = (int)$rate;
+
+        //echo $rating_value;
+        if( ($rating_value - 1) !== 0){
+            //array_push($rates,$rating_value - 1);
+            $this->db->or_where('rating', $rating_value - 1);
+        }
+        if( $rating_value +1 < 6){
+            //array_push($rates,$rating_value + 1);
+            $this->db->or_where('rating', $rating_value + 1);
+        }
+
+        //$this->db->or_where('rating', $rates);
 //        if($sort_first == 1){
 //            $this->db->order_by('rating', 'ASC');
 //        }else if($sort_first == 2){
