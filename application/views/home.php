@@ -35,13 +35,14 @@
             <div class="content" style="margin-top: 13px !important;">
                 <div class="row">
                     <div class="col-md-12">
+                        <div id="top_advertisement" class="col-lg-12" style="text-align: center;margin-bottom: 20px;">
+
+                        </div>
                         <?php
                         foreach ($ads as $ad) {
                             if ($ad->ad_position == "Top") {
                                 ?>
-                                    <div class="col-lg-12" style="text-align: center;margin-bottom: 20px;">
-                                        <?php echo $ad->ad_value; ?>
-                                    </div>
+
                                 <?php
                             }
                         }
@@ -270,6 +271,7 @@
                     }
                 });
                 show_columnA_data();
+                get_top_ad($('#customRange2').val());
 
                 function sliderChange(val) {
                     document.getElementById('demo').innerHTML = val;
@@ -285,7 +287,9 @@
                     $("#columnB_data2").empty();
                     $("#columnC_data").empty();
                     $("#columnC_data2").empty();
+                    $("#top_advertisement").empty();
                     show_columnA_data();
+                    get_top_ad($('#customRange2').val());
                     //alert(this.value);
                     if(this.value == 4 || this.value == 4){
                         document.getElementById('customRange2').className = 'red_slider';
@@ -313,11 +317,37 @@
                     }
                 }
 
-                function fect_link_data(rate){
+                function get_top_ad(rate){
                     var ajaxdata = {
                         rating : rate,
                     };
                     console.log(rate);
+                    $.ajax({
+                        url:'/totalbias/get_ad_top_data',
+                        type:"post",
+                        data:ajaxdata,
+                        success: function(data){
+                            //console.log(data);
+                            var links_datas = data;
+                            var obj = JSON.parse(links_datas);
+
+                            var advalue = '';
+                            obj.forEach(function(item){
+                                advalue += item.ad_value;
+                            });
+                            //console.log(trHTML_center);
+                            $("#top_advertisement").append(advalue);
+                        },error: function (jqXHR, textStatus, errorThrown) {
+                            alert( textStatus + errorThrown + '! Contact your administrator.');
+                        }
+                    });
+                }
+
+                function fect_link_data(rate){
+                    var ajaxdata = {
+                        rating : rate,
+                    };
+                    //console.log(rate);
                     $.ajax({
                         url:'/totalbias/get_cloumnA_data',
                         type:"post",

@@ -53,6 +53,20 @@ class Totalbias extends CI_Controller {
         $this->load->view('home', $this->data);
     }
 
+    public function get_ad_top_data(){
+        $rating = $_POST['rating'];
+        $ads = $this->ad_model->get_ad_specific_rating($rating);
+        $data_ads = array();
+
+        foreach ($ads as $data_ad) {
+            $arr = array();
+            $arr['ad_value'] = $data_ad->ad_value;
+            $data_ads[] =  $arr;
+        }
+        echo json_encode($data_ads);
+
+    }
+
     public function get_cloumnA_data(){
 
         $settings = $this->settings_model->get_all();
@@ -89,26 +103,28 @@ class Totalbias extends CI_Controller {
             $col = $ad->ad_column;
         }
 
-        //echo count($numbers);
+       // echo count($numbers);
 
         $ctr = 0;
         $counter=0;
         foreach ($links as $data_link) {
 
-            if($ctr%5 == 0){
-                //$col = rand(1, 3);
-
-                $gen_num = rand(0, count($numbers));
-                if(count($numbers) == 1){
-                    $gen_num = 0;
-                }else if($gen_num == count($numbers)){
-                    $gen_num = $gen_num - 1;
-                }
-                if(isset($col) && $col == $data_link->column_num) {
-                    $get_ads = $this->ad_model->get_ad_details($numbers[$gen_num],$rating);
-                    $arr['title'] = "<div style='margin-bottom: 10px;'>" . $get_ads->ad_value . "</div>";
-                    $arr['column_num'] =  $get_ads->ad_column;
-                    $data_links[] = $arr;
+            if ($ctr % 5 == 0) {
+                if($counter < count($numbers)) {
+                    //$col = rand(1, 3);
+                    $gen_num = rand(0, count($numbers));
+                    if (count($numbers) == 1) {
+                        $gen_num = 0;
+                    } else if ($gen_num == count($numbers)) {
+                        $gen_num = $gen_num - 1;
+                    }
+                    if (isset($col) && $col == $data_link->column_num) {
+                        $get_ads = $this->ad_model->get_ad_details($numbers[$gen_num], $rating);
+                        $arr['title'] = "<div style='margin-bottom: 10px;'>" . $get_ads->ad_value . "</div>";
+                        $arr['column_num'] = $get_ads->ad_column;
+                        $data_links[] = $arr;
+                        $counter++;
+                    }
                 }
             }
 
