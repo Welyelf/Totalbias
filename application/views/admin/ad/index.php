@@ -45,7 +45,6 @@
                                                 <select class="form-control" name="ad_position" id="ad_position">
                                                     <option value="Full">Full-Width (Footer)</option>
                                                     <option value="Left">Left (Footer) </option>
-                                                    <option value="Right">Right (Footer)</option>
                                                     <option value="Center">Center (Footer)</option>
                                                     <option value="Top">Top</option>
                                                     <option value="Column">Column</option>
