@@ -330,7 +330,17 @@
                             //console.log(data);
                             var links_datas = data;
                             var obj = JSON.parse(links_datas);
+                            console.log(obj.length);
 
+                            if(obj.length == 0){
+                                if(Number(rate) == 1){
+                                    get_top_ad(Number(rate)+1);
+                                }else if(Number(rate) == 5){
+                                    get_top_ad(Number(rate)-1);
+                                }else{
+                                    get_top_ad(Number(rate)+1);
+                                }
+                            }
                             var advalue = '';
                             obj.forEach(function(item){
                                 advalue += item.ad_value;

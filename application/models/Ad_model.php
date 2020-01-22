@@ -44,7 +44,7 @@ class Ad_model extends CI_Model
     public function get_all_active_ratings($rate)
     {
         $this->db->where("ad_status",1);
-        //$this->db->where("ad_position","Column");
+        $this->db->where("ad_position","Column");
         $this->db->where("ad_rating",$rate);
         $query = $this->db->get($this->table);
         return $query->result();
