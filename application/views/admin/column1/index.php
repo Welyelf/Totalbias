@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-6">
-                                                <label for="publisher" class="col-form-label-mini">Publisher</label>
+                                                <label for="publisher" class="col-form-label-mini">Publisher | Author</label>
                                                 <input type="text"  name="publisher" id="publisher" class="form-control" required >
                                             </div>
                                             <div class="col-md-2">
@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-6">
-                                                <label for="author" class="col-form-label-mini">Author</label>
+                                                <label for="author" class="col-form-label-mini">Time</label>
                                                 <input type="text" name="author" id="author" class="form-control" >
                                             </div>
                                             <div class="col-md-2">

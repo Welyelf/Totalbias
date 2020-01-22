@@ -92,15 +92,23 @@ class Totalbias extends CI_Controller {
         //echo count($numbers);
 
         $ctr = 0;
+        $counter=0;
         foreach ($links as $data_link) {
 
             if($ctr%5 == 0){
+                //$col = rand(1, 3);
+
                 $gen_num = rand(0, count($numbers));
-                if(isset($col) && $col == $data_link->column_num){
-                    $get_ads = $this->ad_model->get_details($numbers[$gen_num]);
-                    $arr['title'] = "<div style='margin-bottom: 10px;text-align: center;'>" .$get_ads->ad_value ."</div>" ;
-                    $arr['column_num'] = $col;
-                    $data_links[] =  $arr;
+                if(count($numbers) == 1){
+                    $gen_num = 0;
+                }else if($gen_num == count($numbers)){
+                    $gen_num = $gen_num - 1;
+                }
+                if(isset($col) && $col == $data_link->column_num) {
+                    $get_ads = $this->ad_model->get_ad_details($numbers[$gen_num],$rating);
+                    $arr['title'] = "<div style='margin-bottom: 10px;'>" . $get_ads->ad_value . "</div>";
+                    $arr['column_num'] =  $get_ads->ad_column;
+                    $data_links[] = $arr;
                 }
             }
 
@@ -148,11 +156,11 @@ class Totalbias extends CI_Controller {
 
 
             if($data_link->img_display == 1){
-                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><a href=' $data_link->url ' target='_blank' ><img src='$data_link->img_path' alt='$data_link->title' class='responsive'/></a><br><div class='panel-body'> <a target='_blank' class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
+                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12 responsives'><a href=' $data_link->url ' target='_blank' ><img src='$data_link->img_path' alt='$data_link->title' class='responsive'/></a><br><div class='panel-body'> <a target='_blank' class='hover_effects' $title_css_assign_hover href=' $data_link->url '  ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
                 <div  id='publisher2'><small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small></div> </div></div></div>";
             }
             else{
-                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12'><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url ' target='_blank' ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
+                $arr['title'] = "<div class='row' id='columnRow'><div class='col-12 col-md-12 responsives'><div class='panel-body'> <a class='hover_effects' $title_css_assign_hover href=' $data_link->url ' target='_blank' ><h4 class='link_title'  $title_css_assign > $data_link->title  </h4></a>
                 <div  id='publisher2'><small id='publisher' $publisher_css_assign><i>$data_link->publisher</i></small> <small ><i id='author' $author_css_assign > $author </i></small></div> </div></div></div>";
             }
 

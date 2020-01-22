@@ -24,8 +24,6 @@ class Auth
                     return TRUE;
                 }else{
                     redirect(base_url("/administrator/column1"));
-
-
                 }
 
         }

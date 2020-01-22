@@ -37,7 +37,7 @@
                     <div class="col-md-12">
                         <?php
                         foreach ($ads as $ad) {
-                            if ($ad->ad_rating == "0" && $ad->ad_position == "Top") {
+                            if ($ad->ad_position == "Top") {
                                 ?>
                                     <div class="col-lg-12" style="text-align: center;margin-bottom: 20px;">
                                         <?php echo $ad->ad_value; ?>
@@ -45,16 +45,21 @@
                                 <?php
                             }
                         }
-
+//                        function randomGen($min, $max, $quantity) {
+//                            $numbers = range($min, $max);
+//                            shuffle($numbers);
+//                            return array_slice($numbers, 0, $quantity);
+//                        }
+//                        print_r(randomGen(0,20,20));
                         ?>
                     </div>
                     <div class="col-lg-12 col-md-12 col-sm-12 range_slider" style="text-align: center;">
                         <img src="/assets/img/tb1.png" class="totalbias_logo">
                             <br> <br>
                         <div>
-                        <small id="more_liberal" style="color:#036;padding-left: 40px;font-size: 14px;">More Liberal << </small>
+                        <a id="more_liberal" style="color:#036;padding-left: 40px;font-size: 14px;text-decoration:none !important;cursor: pointer;">More Liberal << </a>
                             <input type="range" class="slider" min="1" step="1" max="5" id="customRange2" data-rangeslider>
-                        <small id="more_conservative" style="color:#900;font-size: 14px;">>> More Conservative</small>
+                        <small id="more_conservative" style="color:#900;font-size: 14px;text-decoration:none !important;cursor: pointer;">>> More Conservative</small>
                         </div>
                         <br><br>
 
@@ -134,7 +139,7 @@
                 <div class="col-md-12">
                     <?php
                         foreach ($ads as $ad) {
-                            if ($ad->ad_rating == "0") {
+
                                 if ($ad->ad_position == "Left") {
                                     ?>
                                     <div class="col-lg-4 col-md-12 col-sm-12">
@@ -177,7 +182,7 @@
                                     <?php
                                 }
 
-                            }
+
                         }
 
                     ?>
@@ -226,6 +231,44 @@
 
             $(document).ready( function () {
 
+                $('#more_liberal').click(function() {
+                   $("#customRange2").val(parseInt($("#customRange2").val())-1);
+                    $("#customRange2").trigger('change');
+                    $("#columnA_data").empty();
+                    $("#columnA_data2").empty();
+                    $("#columnB_data").empty();
+                    $("#columnB_data2").empty();
+                    $("#columnC_data").empty();
+                    $("#columnC_data2").empty();
+                    show_columnA_data();
+                    //alert(this.value);
+                    if($("#customRange2").val() == 4 || $("#customRange2").val() == 4){
+                        document.getElementById('customRange2').className = 'red_slider';
+                    }else if($("#customRange2").val() == 3){
+                        document.getElementById('customRange2').className = 'slider';
+                    }else if($("#customRange2").val() == 1 || $("#customRange2").val() == 2){
+                        document.getElementById('customRange2').className = 'blue_slider';
+                    }
+                });
+                $('#more_conservative').click(function() {
+                    $("#customRange2").val(parseInt($("#customRange2").val())+1);
+                    $("#customRange2").trigger('change');
+                    $("#columnA_data").empty();
+                    $("#columnA_data2").empty();
+                    $("#columnB_data").empty();
+                    $("#columnB_data2").empty();
+                    $("#columnC_data").empty();
+                    $("#columnC_data2").empty();
+                    show_columnA_data();
+                    //alert(this.value);
+                    if($("#customRange2").val() == 4 || $("#customRange2").val() == 4){
+                        document.getElementById('customRange2').className = 'red_slider';
+                    }else if($("#customRange2").val() == 3){
+                        document.getElementById('customRange2').className = 'slider';
+                    }else if($("#customRange2").val() == 1 || $("#customRange2").val() == 2){
+                        document.getElementById('customRange2').className = 'blue_slider';
+                    }
+                });
                 show_columnA_data();
 
                 function sliderChange(val) {
@@ -252,6 +295,8 @@
                         document.getElementById('customRange2').className = 'blue_slider';
                     }
                 }
+
+
                 function show_columnA_data(){
 
                     var rating_value =  $('#customRange2').val();
@@ -396,7 +441,12 @@
 
 <style>
     .responsive:hover{
-        opacity: 80%;
+        opacity: 0.5;
+        filter: alpha(opacity=50); /* For IE8 and earlier */
+    }
+    .responsives:hover{
+        text-decoration: <?php if($settings->title_underline_on_hover == "Yes"){echo "underline";}else{echo "none";} ?> ;
+        color : <?php echo $settings->title_font_color_hover; ?> !important;
     }
     .header_column{
         width:95%;

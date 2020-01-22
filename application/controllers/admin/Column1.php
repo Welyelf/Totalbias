@@ -6,7 +6,7 @@ class Column1 extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->auth->check(array("", ""));
+        //$this->auth->check(array("", ""));
         $this->load->model('Links_model', 'links');
         $this->load->model('Scoring_model', 'scoring_model');
 

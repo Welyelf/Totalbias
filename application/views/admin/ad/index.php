@@ -43,11 +43,12 @@
                                             <label for="column_num" class="col-form-label text-md-right">Ad Position</label>
                                             <div class="col-md-12">
                                                 <select class="form-control" name="ad_position" id="ad_position">
-                                                    <option value="Full">Full-Width</option>
-                                                    <option value="Left">Left</option>
-                                                    <option value="Right">Right</option>
-                                                    <option value="Center">Center</option>
+                                                    <option value="Full">Full-Width (Footer)</option>
+                                                    <option value="Left">Left (Footer) </option>
+                                                    <option value="Right">Right (Footer)</option>
+                                                    <option value="Center">Center (Footer)</option>
                                                     <option value="Top">Top</option>
+                                                    <option value="Column">Column</option>
                                                 </select>
                                             </div>
                                         </div>

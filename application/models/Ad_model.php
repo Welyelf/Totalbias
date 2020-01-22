@@ -16,6 +16,16 @@ class Ad_model extends CI_Model
             return $query->row();
         }
     }
+
+
+    public function get_ad_details($key, $rating)
+    {
+        $query = $this->db->get_where($this->table, array('id' => $key , 'ad_rating' => $rating), 1);
+
+        return $query->row();
+
+    }
+
     public function get_all_active()
     {
         $this->db->where("ad_status",1);
@@ -25,6 +35,7 @@ class Ad_model extends CI_Model
     public function get_all_active_ratings($rate)
     {
         $this->db->where("ad_status",1);
+        $this->db->where("ad_position","Column");
         $this->db->where("ad_rating",$rate);
         $query = $this->db->get($this->table);
         return $query->result();
