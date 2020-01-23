@@ -35,9 +35,12 @@
             <div class="content" style="margin-top: 13px !important;">
                 <div class="row">
                     <div class="col-md-12">
-                        <div id="top_advertisement" class="col-lg-12" style="text-align: center;margin-bottom: 20px;">
+                        <div class="col-lg-12" style="text-align: center;margin-bottom: 20px;position: relative;">
+                            <div id="top_advertisement" >
 
+                            </div>
                         </div>
+
                         <?php
                         foreach ($ads as $ad) {
                             if ($ad->ad_position == "Top") {
@@ -54,8 +57,8 @@
 //                        print_r(randomGen(0,20,20));
                         ?>
                     </div>
-                    <div class="col-lg-12 col-md-12 col-sm-12 range_slider" style="text-align: center;">
-                        <img src="/assets/img/tb1.png" class="totalbias_logo">
+                    <div class="col-lg-12 col-md-12 col-sm-12 range_slider" style="text-align: center;position: sticky;">
+                        <img src="/assets/img/tb1.png" id="tb_logo" class="totalbias_logo">
                             <br> <br>
                         <div>
                         <a id="more_liberal" style="color:#036;padding-left: 40px;font-size: 14px;text-decoration:none !important;cursor: pointer;">More Liberal << </a>
@@ -287,7 +290,6 @@
                     $("#columnB_data2").empty();
                     $("#columnC_data").empty();
                     $("#columnC_data2").empty();
-                    $("#top_advertisement").empty();
                     show_columnA_data();
                     get_top_ad($('#customRange2').val());
                     //alert(this.value);
@@ -331,22 +333,30 @@
                             var links_datas = data;
                             var obj = JSON.parse(links_datas);
                             console.log(obj.length);
+                            var num=0;
 
                             if(obj.length == 0){
                                 if(Number(rate) == 1){
                                     get_top_ad(Number(rate)+1);
+                                }else if(Number(rate) == 2){
+                                    get_top_ad(Number(rate)-1);
+                                }else if(Number(rate) == 4){
+                                    get_top_ad(Number(rate)+1);
                                 }else if(Number(rate) == 5){
                                     get_top_ad(Number(rate)-1);
                                 }else{
-                                    get_top_ad(Number(rate)+1);
+                                    get_top_ad(Number(rate));
                                 }
+                            }else if (obj.length > 1){
+                                num = Math.floor(((Math.random() * obj.length) + 1) - 1 );
+                                console.log(num);
                             }
+                            //console.log(obj[1].ad_value);
                             var advalue = '';
-                            obj.forEach(function(item){
-                                advalue += item.ad_value;
-                            });
-                            //console.log(trHTML_center);
+                            advalue += obj[num].ad_value;
+                            $("#top_advertisement").empty();
                             $("#top_advertisement").append(advalue);
+
                         },error: function (jqXHR, textStatus, errorThrown) {
                             alert( textStatus + errorThrown + '! Contact your administrator.');
                         }
