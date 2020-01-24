@@ -57,6 +57,7 @@ $route['administrator/dashboard'] = 'admin/dashboard';
 $route['administrator/column1'] = 'admin/column1';
 $route['administrator/scoring'] = 'admin/scoring';
 $route['administrator/settings'] = 'admin/settings';
+$route['administrator/headline'] = 'admin/headline';
 $route['administrator/ad'] = 'admin/ad';
 $route['administrator/users'] = 'admin/users';
 $route['administrator/settings/add'] = 'admin/settings/add';

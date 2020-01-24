@@ -42,6 +42,12 @@
                         <p>Advertisement</p>
                     </a>
                 </li>
+                <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/headline"){echo "active";} ?>">
+                    <a href="<?php echo base_url('/administrator/headline'); ?>">
+                        <i class="nc-icon nc-tag-content"></i>
+                        <p>Headline</p>
+                    </a>
+                </li>
                     <li class="<?php if($_SERVER['REQUEST_URI']== "/administrator/scoring"){echo "active";} ?>">
                         <a href="<?php echo base_url('/administrator/scoring'); ?>">
                             <i class="nc-icon nc-paper"></i>

@@ -209,6 +209,10 @@
                                 <i class="fa fa-twitter" aria-hidden="true" style="color:#1da1f3;font-size: 16px;"></i> <a target="_blank" href="https://twitter.com/total_bias">@total_bias</a>
                             </span>
                             <span class="copyright">
+                                |
+                                <i class="fa fa-facebook" aria-hidden="true" style="color:#1da1f3;font-size: 16px;"></i> <a target="_blank" href="https://www.facebook.com/totalbias">TotalBias</a>
+                            </span>
+                            <span class="copyright">
                                  <a target="_blank" href="mailto:email.inquiries@totalbias.com" >email.inquiries@totalbias.com</a>
                             </span>
                         </div>
@@ -335,21 +339,25 @@
                             console.log(obj.length);
                             var num=0;
 
-                            if(obj.length == 0){
-                                if(Number(rate) == 1){
-                                    get_top_ad(Number(rate)+1);
-                                }else if(Number(rate) == 2){
-                                    get_top_ad(Number(rate)-1);
-                                }else if(Number(rate) == 4){
-                                    get_top_ad(Number(rate)+1);
-                                }else if(Number(rate) == 5){
-                                    get_top_ad(Number(rate)-1);
-                                }else{
-                                    get_top_ad(Number(rate));
+                            if(Number(rate) == 3){
+
+                            }else{
+                                if(obj.length == 0){
+                                    if(Number(rate) == 1){
+                                        get_top_ad(Number(rate)+1);
+                                    }else if(Number(rate) == 2){
+                                        get_top_ad(Number(rate)-1);
+                                    }else if(Number(rate) == 4){
+                                        get_top_ad(Number(rate)+1);
+                                    }else if(Number(rate) == 5){
+                                        get_top_ad(Number(rate)-1);
+                                    }else{
+                                        //get_top_ad(Number(rate));
+                                    }
+                                }else if (obj.length > 1){
+                                    num = Math.floor(((Math.random() * obj.length) + 1) - 1 );
+                                    console.log(num);
                                 }
-                            }else if (obj.length > 1){
-                                num = Math.floor(((Math.random() * obj.length) + 1) - 1 );
-                                console.log(num);
                             }
                             //console.log(obj[1].ad_value);
                             var advalue = '';
@@ -358,7 +366,7 @@
                             $("#top_advertisement").append(advalue);
 
                         },error: function (jqXHR, textStatus, errorThrown) {
-                            alert( textStatus + errorThrown + '! Contact your administrator.');
+                            console.log( textStatus + errorThrown + '! Contact your administrator.');
                         }
                     });
                 }
@@ -410,7 +418,7 @@
                             $("#columnC_data").append(trHTML_right);
                             $("#columnC_data2").append(trHTML_right);
                         },error: function (jqXHR, textStatus, errorThrown) {
-                            alert( textStatus + errorThrown + '! Contact your administrator.');
+                            console.log( textStatus + errorThrown + '! Contact your administrator.');
                         }
                     });
                 }
@@ -497,6 +505,8 @@
     .responsives:hover{
         text-decoration: <?php if($settings->title_underline_on_hover == "Yes"){echo "underline";}else{echo "none";} ?> ;
         color : <?php echo $settings->title_font_color_hover; ?> !important;
+        opacity: 0.5;
+        filter: alpha(opacity=50); /* For IE8 and earlier */
     }
     .header_column{
         width:95%;
