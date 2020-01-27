@@ -33,7 +33,6 @@ class Headline extends CI_Controller {
                 $this->headline->add($input);
                 echo "add";
             }
-
         }
     }
     public function delete()

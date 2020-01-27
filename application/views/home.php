@@ -11,6 +11,8 @@
 
             gtag('config', 'UA-154420543-1');
         </script>
+
+        <script data-ad-client="ca-pub-6084023565850997" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <meta charset="utf-8" />
         <link rel="icon" type="image/png" href="../assets/img/tb.png">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -137,64 +139,31 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <hr >
+                        <hr>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <?php
-                        foreach ($ads as $ad) {
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-lg-4 col-md-12 " style="text-align:center;">
+                            asfdasdfasdf
+                        </div>
+                        <div class="col-lg-4 col-md-12" style="text-align:center;">
+                            asdfasdfs
+                        </div>
+                        <div class="col-md-4 col-md-12" style="text-align:center;">
+                            zzzzzzzzzzz
+                        </div>
 
-                                if ($ad->ad_position == "Left") {
-                                    ?>
-                                    <div class="col-lg-4 col-md-12 col-sm-12">
-                                        <?php echo $ad->ad_value; ?>
-                                    </div>
-                                    <div class="col-lg-4 col-md-12 col-sm-12">
-
-                                    </div>
-                                    <div class="col-lg-4 col-md-12 col-sm-12">
-
-                                    </div>
-                                    <?php
-
-                                } else if ($ad->ad_position == "Center") {
-                                    ?>
-                                    <div class="col-lg-4 col-md-12 col-sm-12">
-
-                                    </div>
-                                    <div class="col-lg-4 col-md-12 col-sm-12" style="align;center;">
-                                        <?php echo $ad->ad_value; ?>
-                                    </div>
-                                    <?php
-                                } else if ($ad->ad_position == "Right") {
-                                    ?>
-                                    <div class="col-lg-4 col-md-12 col-sm-12">
-
-                                    </div>
-                                    <div class="col-lg-4 col-md-12 col-sm-12">
-
-                                    </div>
-                                    <div class="col-lg-4 col-md-12 col-sm-12" style="align;center;">
-                                        <?php echo $ad->ad_value; ?>
-                                    </div>
-                                    <?php
-                                } else if ($ad->ad_position == "Full") {
-                                    ?>
-                                    <div class="col-md-12">
-                                        <?php echo $ad->ad_value; ?>
-                                    </div>
-                                    <?php
-                                }
-
-
-                        }
-
-                    ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <hr>
+                    </div>
                 </div>
 
-
                 <footer class="footer footer-black  footer-white ">
-                <div class="container-fluid">
+                <div class="container">
                     <div class="row">
                         <div class="credits ml-auto">
 
@@ -504,9 +473,9 @@
     }
     .responsives:hover{
         text-decoration: <?php if($settings->title_underline_on_hover == "Yes"){echo "underline";}else{echo "none";} ?> ;
-        color : <?php echo $settings->title_font_color_hover; ?> !important;
         opacity: 0.5;
         filter: alpha(opacity=50); /* For IE8 and earlier */
+        color :gray !important;
     }
     .header_column{
         width:95%;
