@@ -151,6 +151,13 @@
             "pageLength": 1000,
             "order": [[ 0, "desc" ]]
         });
+
+        var table5 = $('#headlines_table').DataTable({
+            paginate: true,
+            "lengthChange": false,
+            "pageLength": 1000,
+            "order": [[ 0, "desc" ]]
+        });
         // $('#column1 tbody').on('click', 'tr', function () {
         //     var data = table.row( this ).data();
         //     //alert( 'You clicked on '+data[0]+'\'s row' );
@@ -291,6 +298,123 @@
             })
         }
 
+        // headline codes
+
+        $('#submit_form_headline').submit(function(e){
+            //alert("Girls Like You");
+            e.preventDefault();
+
+            var image_path="";
+            var img_path_from_db = document.getElementById("image-path_headline").innerHTML;
+            image_path = img_path_from_db;
+
+            var img = document.getElementById("img_path_headline").value;
+            if(img!==""){
+                $.ajax({
+                    url:'/admin/column1/upload_pic',
+                    type:"post",
+                    data:new FormData(this),
+                    processData:false,
+                    contentType:false,
+                    cache:false,
+                    async:false,
+                    success: function(data){
+                        img = data;
+                        console.log(data);
+                    }
+                });
+            }else{
+                img = image_path;
+            }
+
+
+            var ajaxdata = {
+                title : $('#title_headline').val(),
+                url : $('#url_headline').val(),
+                image : img,
+                rating : $('#rating_headline').val(),
+                id : $('#id_headline').val(),
+            };
+            //alert(Rating);
+            $.ajax({
+                url:'/admin/headline/add',
+                type:"post",
+                data:ajaxdata,
+                success: function(data){
+                    if(data === "add"){
+                        alert_user("Added!","New Headline has been successfully added.");
+                    }else{
+                        alert_user("Updated!","Headline has been successfully updated.");
+                    }
+                },error: function (jqXHR, textStatus, errorThrown) {
+                    alert( textStatus + errorThrown + '! Contact your administrator.');
+                }
+            });
+        });
+
+        $(".edit_button_headline").on( "click", function( event ) {
+            var ID=this.id;
+            $('#headline_modal').modal('show');
+            $('[id="title_headline"]').val($(this).data('title'));
+            $('[id="url_headline"]').val($(this).data('url'));
+            $('[id="rating_headline"]').val($(this).data('rating'));
+            $('[id="id_headline"]').val(ID);
+            $("#article_image_headline").attr('src',$(this).data('imgpath'));
+
+            $('[id="image-path"]').html($(this).data('imgpath'));
+            document.getElementById('image_path_holder_headline').style.display = "block";
+            document.getElementById('image_holder_headline').style.display = "block";
+            document.getElementById("exampleModalLabel_headline").innerHTML = "Edit Headline";
+
+        });
+        $(".delete_headline").on( "click", function( event ) {
+            var ID=this.id;
+            //alert_user("Added!","New link has been successfully added.");
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        url: '/admin/headline/delete',
+                        type: 'POST',
+                        data: {id : ID,},
+                        success: function (data) {
+                            alert_user("Deleted!","Your data has been deleted.");
+
+                        }
+                    });
+                }
+            })
+        });
+
+
+        $("#add_link_headline").on( "click", function( event ) {
+            $('[id="title_headline"]').val("");
+            $('[id="url_headline"]').val("");
+            $('[id="rating_headline"]').val("1");
+            $('[id="id_headline"]').val("");
+            document.getElementById('image_holder_headline').style.display = "none";
+            document.getElementById('image_path_holder_headline').style.display = "none";
+            document.getElementById("exampleModalLabel_headline").innerHTML = "Add Headline";
+        });
+
+        //function alert_user_headline(title,txt){
+        //    Swal.fire({
+        //        title: title,
+        //        text: txt,
+        //        icon: 'success',
+        //        showCancelButton: false,
+        //        confirmButtonText: 'OK'
+        //    }).then((result) => {
+        //        window.location = "//<?php //echo $_SERVER['SERVER_NAME'];?>///administrator/column1";
+        //    })
+        //}
 
 
     });

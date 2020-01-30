@@ -9,6 +9,7 @@ class Column1 extends CI_Controller {
         //$this->auth->check(array("", ""));
         $this->load->model('Links_model', 'links');
         $this->load->model('Scoring_model', 'scoring_model');
+        $this->load->model('Headline_model', 'headline');
 
     }
     public function index()
@@ -40,6 +41,8 @@ class Column1 extends CI_Controller {
         $this->data['news'] = $this->links->get_all_articles(1);
         $this->data['videos'] = $this->links->get_all_articles(2);
         $this->data['podcasts'] = $this->links->get_all_articles(3);
+        $this->data['headlines'] = $this->headline->get_all();
+
         $this->data['archives'] = $this->links->get_all_archived();
         $this->load->view('layout/backend/master', $this->data);
     }

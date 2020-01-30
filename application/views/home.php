@@ -74,6 +74,17 @@
                        <!-- <div><?php echo date("F d, Y"); ?></div>
                         <div ><hr></div>-->
                     </div>
+                    <br>
+                    <div class="col-lg-12" style="text-align: center;margin-bottom: 20px;font-size: 30px;text-decoration: underline;font-family: 'Verdana' !important;">
+                        <div id="headline_data">
+                            <?php foreach ($headlines as $headline) { ?>
+                                <img id=""  src='<?php echo $headline->image;?>' alt='' class='responsive_headline'/>
+                                <br>
+                                <a href="<?php echo $headline->url; ?>" target="_blank"><?php echo $headline->title; ?>  </a>
+                             <?php } ?>
+                        </div>
+                    </div>
+
                     <div class="col-lg-12 col-md-12 col-sm-12" id="mobile_view">
                         <div class="warpper">
                             <input class="radio" id="one" name="group" type="radio" checked>
@@ -143,22 +154,22 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="col-lg-4 col-md-12 " style="text-align:center;">
-                            asfdasdfasdf
-                        </div>
-                        <div class="col-lg-4 col-md-12" style="text-align:center;">
-                            asdfasdfs
-                        </div>
-                        <div class="col-md-4 col-md-12" style="text-align:center;">
-                            zzzzzzzzzzz
-                        </div>
+                    <div class="col-md-12" id="bottom_ads_display">
+                        <div class="col-lg-4 col-md-12 "  id="bottom_left">
 
+                        </div>
+                        <div class="col-lg-4 col-md-12" id="bottom_center">
+
+                        </div>
+                        <div class="col-md-4 col-md-12"  id="bottom_right">
+
+                        </div>
                     </div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <hr>
+                        <br><hr>
                     </div>
                 </div>
 
@@ -180,6 +191,10 @@
                             <span class="copyright">
                                 |
                                 <i class="fa fa-facebook" aria-hidden="true" style="color:#1da1f3;font-size: 16px;"></i> <a target="_blank" href="https://www.facebook.com/totalbias">TotalBias</a>
+                            </span>
+                            <span class="copyright">
+                                |
+                                <i class="fa fa-youtube" aria-hidden="true" style="color:#1da1f3;font-size: 16px;"></i> <a target="_blank" href="https://www.youtube.com/channel/UC07twi0bO9KKiCpeGjDofgw">TotalBias</a>
                             </span>
                             <span class="copyright">
                                  <a target="_blank" href="mailto:email.inquiries@totalbias.com" >email.inquiries@totalbias.com</a>
@@ -247,6 +262,7 @@
                     }
                 });
                 show_columnA_data();
+                show_bottom_ads();
                 get_top_ad($('#customRange2').val());
 
                 function sliderChange(val) {
@@ -263,8 +279,14 @@
                     $("#columnB_data2").empty();
                     $("#columnC_data").empty();
                     $("#columnC_data2").empty();
+
+                    $("#bottom_left").empty();
+                    $("#bottom_center").empty();
+                    $("#bottom_right").empty();
+
                     show_columnA_data();
-                    get_top_ad($('#customRange2').val());
+                    show_bottom_ads();
+                    //get_top_ad($('#customRange2').val());
                     //alert(this.value);
                     if(this.value == 4 || this.value == 4){
                         document.getElementById('customRange2').className = 'red_slider';
@@ -273,14 +295,17 @@
                     }else if(this.value == 1 || this.value == 2){
                         document.getElementById('customRange2').className = 'blue_slider';
                     }
+
                 }
 
+                function show_bottom_ads(){
+                    setTimeout(function() { get_bottom_ad(Number($('#customRange2').val())); }, 1000);
+                 }
 
                 function show_columnA_data(){
 
                     var rating_value =  $('#customRange2').val();
                     fect_link_data(rating_value);
-
 
                     if( (rating_value - 1) !== 0){
                         //setTimeout(function() { fect_link_data(Number(rating_value)-1); }, 900);
@@ -290,6 +315,7 @@
                         //setTimeout(function() { fect_link_data(Number(rating_value)+1); }, 900);
                         //fect_link_data(Number(rating_value)+1);
                     }
+
                 }
 
                 function get_top_ad(rate){
@@ -307,32 +333,18 @@
                             var obj = JSON.parse(links_datas);
                             console.log(obj.length);
                             var num=0;
-
-                            if(Number(rate) == 3){
-
-                            }else{
-                                if(obj.length == 0){
-                                    if(Number(rate) == 1){
-                                        get_top_ad(Number(rate)+1);
-                                    }else if(Number(rate) == 2){
-                                        get_top_ad(Number(rate)-1);
-                                    }else if(Number(rate) == 4){
-                                        get_top_ad(Number(rate)+1);
-                                    }else if(Number(rate) == 5){
-                                        get_top_ad(Number(rate)-1);
-                                    }else{
-                                        //get_top_ad(Number(rate));
-                                    }
-                                }else if (obj.length > 1){
-                                    num = Math.floor(((Math.random() * obj.length) + 1) - 1 );
-                                    console.log(num);
-                                }
-                            }
                             //console.log(obj[1].ad_value);
                             var advalue = '';
                             advalue += obj[num].ad_value;
                             $("#top_advertisement").empty();
+                            // $("#bottom_left").empty();
+                            // $("#bottom_center").empty();
+                            // $("#bottom_right").empty();
+
                             $("#top_advertisement").append(advalue);
+                            // $("#bottom_left").append(advalue);
+                            // $("#bottom_center").append(advalue);
+                            // $("#bottom_right").append(advalue);
 
                         },error: function (jqXHR, textStatus, errorThrown) {
                             console.log( textStatus + errorThrown + '! Contact your administrator.');
@@ -340,6 +352,49 @@
                     });
                 }
 
+                function get_bottom_ad(rate){
+                    var ajaxdata = {
+                        rating : rate
+                    };
+                    $.ajax({
+                        url:'/totalbias/get_ad_bottom_data',
+                        type:"post",
+                        data:ajaxdata,
+                        success: function(data){
+                            //console.log(data);
+                            var links_datas = data;
+                            var obj = JSON.parse(links_datas);
+                            console.log(obj.length);
+                            var num=0;
+                            //console.log(obj[1].ad_value);
+
+                            var trHTML_left = '';
+                            var trHTML_center = '';
+                            var trHTML_right = '';
+
+                            obj.forEach(function(item){
+                                if(item.ad_position === "Left"){
+                                    trHTML_left = item.ad_value;
+                                }else if(item.ad_position === "Center"){
+                                    trHTML_center = item.ad_value;
+                                }else if(item.ad_position ===  "Right"){
+                                    trHTML_right = item.ad_value;
+                                }
+                                //alert(item.column_num);
+                            });
+
+                            $("#bottom_left").empty();
+                            $("#bottom_center").empty();
+                            $("#bottom_right").empty();
+
+                            $("#bottom_left").append(trHTML_left);
+                             $("#bottom_center").append(trHTML_center);
+                            $("#bottom_right").append(trHTML_right);
+                        },error: function (jqXHR, textStatus, errorThrown) {
+                            console.log( textStatus + errorThrown + '! Contact your administrator.');
+                        }
+                    });
+                }
                 function fect_link_data(rate){
                     var ajaxdata = {
                         rating : rate,
@@ -425,13 +480,13 @@
     .tab{
         cursor: pointer;
         padding:10px 10px;
-        margin:0px 2px;
+        margin:20px 6px;
         background: #d3d3d3;
         display:inline-block;
         color:#fff;
         border-radius:3px 3px 0px 0px;
         box-shadow: 0 0.5rem 0.8rem #00000080;
-        width:100px;
+        width:110px;
         text-align: center;
     }
     .panel{
@@ -496,6 +551,15 @@
         min-width: 240px;
         min-height: 120px;
     }
+    .responsive_headline {
+        max-width: 420px;
+        max-height: 210px;
+        margin-left: 15px;
+        width: auto;
+        height: auto;
+        min-width: 240px;
+        min-height: 120px;
+    }
     body{
         clear:both;
     }
@@ -550,11 +614,17 @@
         .main-panel{
             padding-left: 0 !important;
         }
+        #bottom_ads_display{
+            text-align: center;
+        }
     }
 
     @media (min-width: 992px) {
         #mobile_view{
             display: none;
+        }
+        #bottom_ads_display{
+            text-align: center;
         }
     }
 
@@ -573,13 +643,13 @@
         #more_liberal{
 
             position: absolute;
-            margin-top : 20px !important;
+            margin-top : 40px !important;
             padding-left: 0px !important;
 
         }
         #more_conservative{
             display: block;
-            margin-top : 0px !important;
+            margin-top : 20px !important;
             float:right !important;
             text-align: center;
         }
@@ -588,6 +658,9 @@
         }
         #mobile_view{
             display: block;
+        }
+        #bottom_ads_display{
+            text-align : center;
         }
     }
     .main-panel{

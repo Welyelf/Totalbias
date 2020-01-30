@@ -18,6 +18,7 @@ class Totalbias extends CI_Controller {
         $this->load->model('Hits_model', 'hits_model');
         $this->load->model('Scoring_model', 'scoring_model');
         $this->load->model('Ad_model', 'ad_model');
+        $this->load->model('Headline_model', 'headline');
     }
 
     public function index()
@@ -49,6 +50,7 @@ class Totalbias extends CI_Controller {
 			//echo $today_hits->count;
 		}
         $this->data['ads'] = $this->ad_model->get_all_active();
+        $this->data['headlines'] = $this->headline->get_all();
 
         $this->load->view('home', $this->data);
     }
@@ -64,9 +66,20 @@ class Totalbias extends CI_Controller {
             $data_ads[] =  $arr;
         }
         echo json_encode($data_ads);
-
     }
+    public function get_ad_bottom_data(){
+        $rating = $_POST['rating'];
+        $ads = $this->ad_model->get_bottom_ads($rating);
+        $data_ads = array();
 
+        foreach ($ads as $data_ad) {
+            $arr = array();
+            $arr['ad_value'] = $data_ad->ad_value;
+            $arr['ad_position'] = $data_ad->ad_position;
+            $data_ads[] =  $arr;
+        }
+        echo json_encode($data_ads);
+    }
     public function get_cloumnA_data(){
 
         $settings = $this->settings_model->get_all();

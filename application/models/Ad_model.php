@@ -26,13 +26,22 @@ class Ad_model extends CI_Model
     }
     public function get_ad_specific_rating($rating)
     {
-        $this->db->where("ad_rating",$rating);
+        //$this->db->where("ad_rating",$rating);
         $this->db->where("ad_position","Top");
         $this->db->where("ad_status",1);
         $query = $this->db->get($this->table);
         return $query->result();
     }
 
+    public function get_bottom_ads($rating)
+    {
+        $positions = array('Left', 'Center', 'Right');
+        $this->db->where("ad_rating",$rating);
+        $this->db->where_in('ad_position', $positions);
+        $this->db->where("ad_status",1);
+        $query = $this->db->get($this->table);
+        return $query->result();
+    }
 
     public function get_all_active()
     {
