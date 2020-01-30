@@ -75,13 +75,15 @@
                         <div ><hr></div>-->
                     </div>
                     <br>
-                    <div class="col-lg-12" style="text-align: center;margin-bottom: 20px;font-size: 30px;text-decoration: underline;font-family: 'Verdana' !important;">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="text-align: center;margin-bottom: 20px;font-size: 30px;text-decoration: underline;font-family: 'Verdana' !important;">
+                        <div class="container">
                         <div id="headline_data">
                             <?php foreach ($headlines as $headline) { ?>
                                 <img id=""  src='<?php echo $headline->image;?>' alt='' class='responsive_headline'/>
                                 <br>
-                                <a href="<?php echo $headline->url; ?>" target="_blank"><?php echo $headline->title; ?>  </a>
+                                <a id="headline_title" href="<?php echo $headline->url; ?>" target="_blank"><b><?php echo $headline->title; ?>  </b></a>
                              <?php } ?>
+                        </div>
                         </div>
                     </div>
 
@@ -178,25 +180,29 @@
                     <div class="row">
                         <div class="credits ml-auto">
 
-                          <span class="copyright">
+                             <span class="fotter_icons">
+                                <b>Follow TotalBias : </b>
+                            </span>
+
+                            <span class="fotter_icons" style="text-decoration: none;">
+                                <a target="_blank" href="https://twitter.com/total_bias">
+                                    <img src="/assets/img/twitter.png" id="" class="">
+                                </a>
+                                <a target="_blank" href="https://www.facebook.com/totalbias">
+                                    <img src="/assets/img/fb.png" id="" class="">
+                                </a>
+                                <a target="_blank" href="https://www.youtube.com/channel/UC07twi0bO9KKiCpeGjDofgw">
+                                    <img src="/assets/img/yt.png" id="" class="">
+                                </a>
+                            </span>
+                            <span class="fotter_icons">
                             | ©
                             <script>
                               document.write(new Date().getFullYear())
                             </script>. TotalBias.com
                           </span>
-                            <span class="copyright">
+                            <span class="fotter_icons">
                                 |
-                                <i class="fa fa-twitter" aria-hidden="true" style="color:#1da1f3;font-size: 16px;"></i> <a target="_blank" href="https://twitter.com/total_bias">@total_bias</a>
-                            </span>
-                            <span class="copyright">
-                                |
-                                <i class="fa fa-facebook" aria-hidden="true" style="color:#1da1f3;font-size: 16px;"></i> <a target="_blank" href="https://www.facebook.com/totalbias">TotalBias</a>
-                            </span>
-                            <span class="copyright">
-                                |
-                                <i class="fa fa-youtube" aria-hidden="true" style="color:#1da1f3;font-size: 16px;"></i> <a target="_blank" href="https://www.youtube.com/channel/UC07twi0bO9KKiCpeGjDofgw">TotalBias</a>
-                            </span>
-                            <span class="copyright">
                                  <a target="_blank" href="mailto:email.inquiries@totalbias.com" >email.inquiries@totalbias.com</a>
                             </span>
                         </div>
@@ -351,8 +357,14 @@
                         }
                     });
                 }
-
                 function get_bottom_ad(rate){
+                    if(Number(rate) === 4){
+                        rate = 5;
+                    }
+                    if(Number(rate) === 2){
+                        rate = 1;
+                    }
+
                     var ajaxdata = {
                         rating : rate
                     };
@@ -466,7 +478,16 @@
 
 </html>
 <style>
+    @media (max-width: 991px) {
+        .fotter_icons{
+            display: block;
+            text-align: center;
+        }
+    }
 
+    #headline_title:hover{
+        color :#bfbfbf !important;
+    }
     h2{
         color:#000;
         text-align:center;
@@ -626,9 +647,17 @@
         #bottom_ads_display{
             text-align: center;
         }
+
+
     }
 
     @media (max-width: 991px) {
+        #bottom_left{
+            display: none;
+        }
+        #bottom_right{
+            display: none;
+        }
         .range_slider {
             width:100% !important;
         }
